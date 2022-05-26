@@ -1,0 +1,44 @@
+@use "./styles/index.scss" as main;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root {
+  height: 100%;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.main {
+  &-body {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  &-content {
+    background-color: main.$var-clr-charcoal-gray;
+    padding: 4rem;
+  }
+}
