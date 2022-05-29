@@ -1,8 +1,12 @@
 @use "../../styles/index.scss" as main;
 
 .main {
+  padding: 25px 0;
+}
+
+.icon {
+  @extend %topIcon;
 }
 
 .action {
-  background-color: main.$var-clr-dark-gray;
 }

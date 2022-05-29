@@ -1,0 +1,17 @@
+@use "../settings/globals.scss" as var;
+
+%topIcon {
+  color: #c4c4c4;
+  background: #c4c4c4;
+  svg {
+    font-size: 3rem;
+  }
+}
+
+%menuIcon {
+  color: #c4c4c4;
+  background: #c4c4c4;
+  svg {
+    font-size: 2rem;
+  }
+}

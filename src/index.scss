@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+$hamburger-layer-color: #fff;
+@import "hamburgers/_sass/hamburgers/hamburgers.scss";
+
 html {
   position: relative;
   min-height: 100vh;
@@ -32,13 +35,6 @@ code {
   min-height: 100vh;
 }
 
-.main {
-  &-body {
-    display: grid;
-    grid-template-rows: auto 1fr;
-  }
-  &-content {
-    background-color: main.$var-clr-charcoal-gray;
-    padding: 4rem;
-  }
+.content {
+  max-width: 1100px;
 }

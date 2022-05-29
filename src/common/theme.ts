@@ -44,7 +44,7 @@ const darkOptions: IPaletteOptions = {
     contrastText: "#f0f0f0",
   },
   secondary: {
-    main: "#FF6847",
+    main: "#723F8A",
     contrastText: "#fff",
   },
   third: {
@@ -56,7 +56,6 @@ const darkOptions: IPaletteOptions = {
     contrastText: "#fff",
   },
   background: {
-    default: "#1E212D",
     paper: "#000",
   },
 };
@@ -66,11 +65,10 @@ const lightOptions: IPaletteOptions = {
     main: "#24244a",
   },
   secondary: {
-    main: "#FF6847",
+    main: "#723F8A",
     contrastText: "#fff",
   },
   background: {
-    default: "#1E212D",
     paper: "#000",
   },
 };
@@ -79,7 +77,7 @@ const commonOptions: ThemeOptions = {
   typography: {
     htmlFontSize: 10,
     fontFamily: [
-      "Montserrat",
+      "Inter",
       "-apple-system",
       "BlinkMacSystemFont",
       "Segoe UI",
@@ -142,10 +140,10 @@ const commonOptions: ThemeOptions = {
       fontWeight: 400,
     },
     button: {
-      borderRadius: "0.6rem",
+      borderRadius: "0.5rem",
       textTransform: "none",
       fontSize: "1.4rem",
-      padding: "1rem 1.4rem",
+      fontWeight: 400,
     },
   },
   breakpoints: {
@@ -165,11 +163,22 @@ const commonOptions: ThemeOptions = {
         html: {
           fontSize: "62.5%",
         },
+        body: {
+          background:
+            "linear-gradient(180deg, rgba(7, 16, 24, 0.81) 0%, #0a131b 100%)",
+        },
       },
     },
     MuiButton: {
       styleOverrides: {
-        root: {},
+        root: {
+          padding: "0.8rem 1.4rem",
+          minWidth: "15rem",
+          boxShadow: "none",
+          "&:hover": {
+            boxShadow: "none",
+          },
+        },
       },
     },
     MuiPaper: {

@@ -1,5 +1,5 @@
 import { Box, OutlinedInput, Typography } from "@mui/material";
-import clsx from "clsx";
+import classNames from "classnames";
 import React from "react";
 import styles from "./styles.module.scss";
 
@@ -11,7 +11,7 @@ type Props = {
 const SectionHeader = ({ heading, onSearchChange }: Props) => {
   return (
     <Box
-      className={clsx(
+      className={classNames(
         "mb-10 flex w-full items-center justify-between",
         styles.header
       )}

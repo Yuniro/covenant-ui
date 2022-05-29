@@ -1,18 +1,18 @@
 import { Box } from "@mui/system";
-import clsx from "clsx";
+import classNames from "classnames";
 import { Outlet } from "react-router-dom";
 import { Header } from "./header";
-import { Sidebar } from "./sidebar";
+import { SidebarMenu } from "./sidebarMenu";
 
 const ReactApp = () => {
   return (
-    <div className="app h-full flex flex-col">
-      <Header />
-      <div className={clsx("main w-full h-full flex")}>
-        <Sidebar />
-        <Box className={clsx("w-full min-h-full flex flex-col")}>
+    <div className="app flex">
+      <SidebarMenu />
+      <div className={classNames("main w-full flex flex-col")}>
+        <Header />
+        <div className="flex w-full mx-auto content">
           <Outlet />
-        </Box>
+        </div>
       </div>
     </div>
   );
