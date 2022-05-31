@@ -12,7 +12,7 @@ type Props = {
 
 const PageHeader = ({ heading, headingSub, subHeading, value }: Props) => {
   return (
-    <Box className={classNames("p-16", styles.header)}>
+    <Box className={classNames("p-16 hidden", styles.header)}>
       <Box className="flex items-end">
         {typeof heading === "string" && (
           <Typography variant="h1">{heading}</Typography>

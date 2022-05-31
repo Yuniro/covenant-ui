@@ -26,7 +26,7 @@ const Homepage = (props: Props) => {
         subHeading="Total Rewards Pending"
         value="$1,892"
       />
-      <Box className="flex flex-col min-h-full main-content">
+      <Box className="flex hidden flex-col min-h-full main-content">
         <SectionHeader heading="My Rewards" />
         <SectionHeader heading="My Proposals" />
       </Box>

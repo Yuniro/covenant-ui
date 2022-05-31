@@ -15,8 +15,9 @@ import styles from "./styles.module.scss";
 type Props = {};
 
 const SidebarMenu = (props: Props) => {
+  const { PUBLIC_URL } = process.env;
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("mlg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("mlg"));
 
   const getIcon = (
     iconName: string
@@ -87,40 +88,91 @@ const SidebarMenu = (props: Props) => {
     },
   ];
 
+  const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.currentTarget.classList.toggle("is-active");
+    document.body.classList.toggle("show-menu");
+  };
+
   return (
     <Box
       className={classNames(
-        "hidden mlg:flex p-10",
+        "relative mlg:min-w-[70px]",
         styles.main,
-        matches && styles.mainMobile,
-        "flex",
-        "flex-col"
+        isMobile && styles.mainMobile
       )}
       component="aside"
     >
-      {links.map((link, idx) => (
-        <Link
-          key={`lnk_${idx}`}
-          href={link.href}
-          className="py-4 flex"
-          underline="none"
+      <Box
+        className={classNames(
+          "flex h-24 items-center justify-between mlgx:w-full mlg:fixed mlg:h-screen mlg mlg:flex-col mlg:justify-start mlg:w-28 mlg:hover:w-[185px] mlg:items-start group",
+          styles.mainInner
+        )}
+        component="section"
+      >
+        <Box>
+          <Link
+            href={PUBLIC_URL}
+            className={classNames(
+              "px-4 relative block mlg:!ml-8 mlg:px-0",
+              styles.menuLogo
+            )}
+            underline="none"
+          >
+            <Typography variant="h3">C</Typography>
+          </Link>
+        </Box>
+        <Typography className="mlg:hidden" variant="h4">
+          Dashboard
+        </Typography>
+        <button
+          className={classNames(
+            "hamburger mlg:hidden hamburger--squeeze",
+            styles.menuHamburger
+          )}
+          type="button"
+          onClick={onButtonClick}
         >
-          <Box component="span" className={classNames("flex gap-2")}>
-            <Box
-              component="span"
-              className={classNames(
-                "w-12 h-12 flex items-center justify-center",
-                styles.menuIcon
-              )}
+          <span className="hamburger-box">
+            <span className="hamburger-inner"></span>
+          </span>
+        </button>
+        <Box
+          className={classNames(
+            "flex mlg:flex-col",
+            styles.menu,
+            isMobile && styles.menuMobile
+          )}
+        >
+          {links.map((link, idx) => (
+            <Link
+              key={`lnk_${idx}`}
+              href={link.href}
+              className="py-4 flex mlg:!ml-8"
+              underline="none"
             >
-              <SvgIcon component={getIcon(link.icon)} viewBox="0 0 31 31" />
-            </Box>
-            <Typography className={classNames(styles.menuText)}>
-              {link.text}
-            </Typography>
-          </Box>
-        </Link>
-      ))}
+              <Box component="span" className={classNames("flex gap-2")}>
+                <Box
+                  component="span"
+                  className={classNames(
+                    "w-12 h-12 hidden mlg:flex items-center justify-center",
+                    styles.menuIcon
+                  )}
+                >
+                  <SvgIcon component={getIcon(link.icon)} viewBox="0 0 31 31" />
+                </Box>
+                <Typography
+                  className={classNames(
+                    "mlg:hidden mlg:group-hover:flex mlg:items-center",
+                    styles.menuText
+                  )}
+                >
+                  {link.text}
+                </Typography>
+              </Box>
+            </Link>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -1,38 +1,78 @@
 @use "../../styles/index.scss" as main;
 
 .main {
-  width: 70px;
-  background: linear-gradient(
-    180deg,
-    rgba(69, 71, 73, 0.81) 0%,
-    rgba(41, 51, 60, 0.81) 100%
-  );
-  box-shadow: 10px 0px 50px 10px rgba(0, 0, 0, 0.25);
-  height: 100vh;
-
   &Mobile {
-    left: -100%;
-    transition: all 0.3s ease-in;
-    position: absolute;
-    width: 100%;
-    z-index: 5;
+  }
+
+  &Inner {
+    background: linear-gradient(
+      180deg,
+      rgba(69, 71, 73, 0.81) 0%,
+      rgba(41, 51, 60, 0.81) 100%
+    );
+    box-shadow: 10px 0px 50px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      .menu {
+        &Text {
+          opacity: 1;
+          margin-left: 10px;
+        }
+      }
+    }
   }
 
   body[class~="show-menu"] & {
     &Mobile {
-      display: flex;
-      left: 0;
     }
   }
 }
 
 .menu {
+  &Mobile {
+    transition: all 0.3s ease-in;
+    position: absolute;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(
+      180deg,
+      rgba(69, 71, 73) 0%,
+      rgba(41, 51, 60) 100%
+    );
+    left: 0;
+    top: -720px;
+    z-index: 3;
+    margin-top: 60px;
+    height: 0;
+    flex-direction: column;
+  }
+
+  &Hamburger,
+  &Logo {
+    z-index: 5;
+  }
+
   &Icon {
     @extend %menuIcon;
     border-radius: 3px;
   }
 
   &Text {
-    display: none;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  body[class~="show-menu"] & {
+    &Mobile {
+      display: flex;
+      height: calc(100vh - 60px);
+      top: 0px;
+    }
+
+    &Text {
+      font-size: 20px;
+    }
   }
 }
