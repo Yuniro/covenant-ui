@@ -1,17 +1,17 @@
-import { Box } from "@mui/material";
-import { CardRewards, ProposalCardActive } from "../../components";
+import { Box, Typography } from "@mui/material";
+import React from "react";
+import { ProposalCardActive } from "../../components";
 
 type Props = {};
 
-const Homepage = (props: Props) => {
+const ProposalPage = (props: Props) => {
   return (
     <Box className="main-body flex flex-col grow">
       <Box className="flex flex-col min-h-full main-content gap-14">
-        <CardRewards />
         <ProposalCardActive />
       </Box>
     </Box>
   );
 };
 
-export default Homepage;
+export default ProposalPage;

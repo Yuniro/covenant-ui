@@ -1,16 +1,12 @@
 import {
+  Palette as MuiPallete,
   PaletteColorOptions,
-  PaletteOptions,
+  PaletteOptions ,
   ThemeOptions,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 import { colors } from "./colors";
-
-export interface IPaletteOptions extends PaletteOptions {
-  third?: PaletteColorOptions;
-  gray?: PaletteColorOptions;
-}
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -37,7 +33,20 @@ declare module "@mui/material/Button" {
   }
 }
 
-const darkOptions: IPaletteOptions = {
+declare module "@mui/material/styles/createPalette" {
+
+  interface Palette {
+    third: Palette['primary'];
+    gray: Palette['primary'];
+  }
+  interface PaletteOptions {
+    third: PaletteColorOptions;
+    gray: PaletteColorOptions;
+  }
+}
+
+
+const darkOptions: PaletteOptions = {
   mode: "dark",
   primary: {
     main: "#fff",
@@ -48,18 +57,18 @@ const darkOptions: IPaletteOptions = {
     contrastText: "#fff",
   },
   third: {
-    main: "#9747FF",
+    main: colors.maroon,
     contrastText: "#fff",
   },
   gray: {
-    main: colors.darkGray,
+    main: colors.lightGray,
     contrastText: "#fff",
   },
   background: {
-    paper: "#000",
+    paper: "transparent",
   },
 };
-const lightOptions: IPaletteOptions = {
+const lightOptions: PaletteOptions = {
   mode: "light",
   primary: {
     main: "#24244a",
@@ -68,8 +77,16 @@ const lightOptions: IPaletteOptions = {
     main: "#723F8A",
     contrastText: "#fff",
   },
+  third: {
+    main: colors.maroon,
+    contrastText: "#fff",
+  },
+  gray: {
+    main: colors.lightGray,
+    contrastText: "#fff",
+  },
   background: {
-    paper: "#000",
+    paper: "transparent",
   },
 };
 
@@ -112,27 +129,27 @@ const commonOptions: ThemeOptions = {
       fontWeight: 400,
     },
     h4: {
-      fontSize: "2.4rem",
+      fontSize: "3.2rem",
       fontWeight: 400,
     },
     h5: {
-      fontSize: "1.2rem",
+      fontSize: "2.8rem",
       fontWeight: 400,
     },
     h6: {
-      fontSize: "1.2rem",
+      fontSize: "2.4rem",
       fontWeight: 400,
     },
     subtitle1: {
-      fontSize: "1.2rem",
+      fontSize: "2rem",
       fontWeight: 400,
     },
     subtitle2: {
-      fontSize: "1.2rem",
+      fontSize: "2rem",
       fontWeight: 400,
     },
     caption: {
-      fontSize: "1.2rem",
+      fontSize: "1.8rem",
       fontWeight: 400,
     },
     overline: {
