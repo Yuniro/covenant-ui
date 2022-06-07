@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import HomePage from "../pages/home";
-import ProposalPage from "../pages/proposal";
+import ProposalNewPage from "../pages/proposalNew";
 import ProposalSymbolPage from "../pages/proposalSymbol";
 import { ReactApp } from "../components";
 
@@ -13,7 +13,7 @@ const AppRoutes: FC = () => {
       <Routes>
         <Route element={<ReactApp />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/proposal/new" element={<ProposalPage />} />
+          <Route path="/proposal/new" element={<ProposalNewPage />} />
           <Route path="/proposal/:symbol" element={<ProposalSymbolPage />} />
         </Route>
       </Routes>
