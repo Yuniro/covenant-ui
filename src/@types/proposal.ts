@@ -1,6 +1,8 @@
+import { Protocol } from "./protocol";
+
 export type Proposal = {
   name: string;
-  symbol: string;
+  protocol: Protocol;
   isActive: boolean;
   reward: number;
   type: EnumProposalType;

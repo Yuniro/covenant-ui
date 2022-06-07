@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 // slices
-import productReducer from "./slices/proposal";
+import proposalReducer from "./slices/proposal";
 
 // ----------------------------------------------------------------------
 
@@ -25,20 +25,19 @@ const storage =
 
 const rootPersistConfig = {
   key: "root",
-  storage,
   keyPrefix: "convenant-",
+  storage,
   whitelist: [],
 };
 
-const productPersistConfig = {
-  key: "product",
+const proposalPersistConfig = {
+  key: "proposal",
+  keyPrefix: "convenant-",
   storage,
-  keyPrefix: "redux-",
-  whitelist: ["sortBy", "checkout"],
 };
 
 const rootReducer = combineReducers({
-  product: persistReducer(productPersistConfig, productReducer),
+  proposal: persistReducer(proposalPersistConfig, proposalReducer),
 });
 
 export { rootPersistConfig, rootReducer };
