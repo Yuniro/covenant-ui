@@ -14,6 +14,9 @@ const AppRoutes: FC = () => {
         <Route element={<ReactApp />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/proposal/new" element={<ProposalNewPage />} />
+          <Route path="/proposal/new/:protocol" element={<ProposalNewPage />} />
+          <Route path="/proposal/new/:protocol/:prsalType" element={<ProposalNewPage />} />
+          <Route path="/proposal/new/:protocol/:prsalType/:kpi" element={<ProposalNewPage />} />
           <Route path="/proposal/:symbol" element={<ProposalSymbolPage />} />
         </Route>
       </Routes>

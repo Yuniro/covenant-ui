@@ -1,18 +1,27 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import { EnumProposalKpi, EnumProposalType } from "../../@types/proposal";
-import { CardRewards } from "../../components";
-import ProtocolList from "./partials/protocolList";
+import { useParams } from "react-router-dom";
+import { ProtocolList, ProposalType, ProposalKpi, ProposalForm } from "./partials";
+import { PageHeader } from "./partials/common";
 
 type Props = {};
 
 const ProposalNewPage = (props: Props) => {
-  console.log('+++++', Object.keys(EnumProposalType));
+  const { protocol, prsalType, kpi } = useParams();
   return (
     <Box className="main-body flex flex-col grow">
       <Box className="flex flex-col min-h-full main-content gap-14">
+        <PageHeader />
         <Box>
-          <ProtocolList />
+          {prsalType && protocol && kpi ? (
+            <ProposalForm />
+          ) : prsalType && protocol ? (
+            <ProposalKpi />
+          ) : protocol ? (
+            <ProposalType />
+          ) : (
+            <ProtocolList />
+          )}
         </Box>
       </Box>
     </Box>

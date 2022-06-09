@@ -7,11 +7,11 @@ type Props = {};
 const ProtocolList = (props: Props) => {
   return (
     <Box className="grid grid-cols-3 gap-20">
-      {ProtocolsList.map(pl => (
-        <ProposalNewCard title={pl.name} />
+      {ProtocolsList.map((pl, idx) => (
+        <ProposalNewCard key={`pl_${idx}`} title={pl.name} slug={pl.symbol} />
       ))}
     </Box>
   );
 };
 
-export default ProtocolList;
+export { ProtocolList };
