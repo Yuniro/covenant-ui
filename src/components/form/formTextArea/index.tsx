@@ -2,6 +2,7 @@ import {
   Box,
   FormControl,
   FormLabel,
+  StyledEngineProvider,
   TextareaAutosize,
   TextareaAutosizeProps,
 } from "@mui/material";
@@ -15,14 +16,17 @@ type Props = {
 
 const FormTextArea = ({ label, placeholder, textAreaProps }: Props) => {
   return (
-    <FormControl className="flex flex-row items-center gap-4">
-      <FormLabel>{label}</FormLabel>
-      <TextareaAutosize
-        placeholder={placeholder}
-        minRows={3}
-        {...textAreaProps}
-      />
-    </FormControl>
+    <StyledEngineProvider injectFirst>
+      <FormControl className="flex flex-row items-center gap-4">
+        <FormLabel className="basis-3/12">{label}</FormLabel>
+        <TextareaAutosize
+          className="basis-9/12"
+          placeholder={placeholder}
+          minRows={3}
+          {...textAreaProps}
+        />
+      </FormControl>
+    </StyledEngineProvider>
   );
 };
 

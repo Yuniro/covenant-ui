@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation, useParams } from "react-router-dom";
-import { EnumProposalType } from "../../../../../@types/proposal";
+import { EnumProposalKpi, EnumProposalType } from "../../../../../@types/proposal";
 import { EnumProtocolName } from "../../../../../@types/protocol";
 
 type Props = {};
@@ -11,7 +11,7 @@ type NavItem = {
 };
 
 const BreadCrumb = (props: Props) => {
-  const { protocol, prsalType } = useParams();
+  const { protocol, prsalType, kpi } = useParams();
   const items: NavItem[] = [];
 
   let locPrefix = "/proposal/new";
@@ -28,6 +28,13 @@ const BreadCrumb = (props: Props) => {
     items.push({
       title: EnumProposalType[prsalType as keyof typeof EnumProposalType],
       href: `${locPrefix}/${prsalType}`,
+    });
+  }
+  if (kpi) {
+    locPrefix = `${locPrefix}/${kpi}`;
+    items.push({
+      title: EnumProposalKpi[kpi as keyof typeof EnumProposalKpi],
+      href: `${locPrefix}/${kpi}`,
     });
   }
 
