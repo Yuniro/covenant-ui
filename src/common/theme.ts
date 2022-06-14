@@ -30,6 +30,7 @@ declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     third: true;
     gray: true;
+    pink: true;
   }
 }
 
@@ -38,10 +39,12 @@ declare module "@mui/material/styles/createPalette" {
   interface Palette {
     third: Palette['primary'];
     gray: Palette['primary'];
+    pink: Palette['primary'];
   }
   interface PaletteOptions {
     third: PaletteColorOptions;
     gray: PaletteColorOptions;
+    pink: PaletteColorOptions;
   }
 }
 
@@ -64,6 +67,10 @@ const darkOptions: PaletteOptions = {
     main: colors.lightGray,
     contrastText: "#fff",
   },
+  pink: {
+    main: colors.pink,
+    contrastText: "#fff",
+  },
   background: {
     paper: "transparent",
   },
@@ -83,6 +90,10 @@ const lightOptions: PaletteOptions = {
   },
   gray: {
     main: colors.lightGray,
+    contrastText: "#fff",
+  },
+  pink: {
+    main: colors.pink,
     contrastText: "#fff",
   },
   background: {

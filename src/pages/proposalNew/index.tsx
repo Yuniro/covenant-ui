@@ -1,19 +1,33 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ProtocolList, ProposalType, ProposalKpi, ProposalForm } from "./partials";
+import {
+  ProtocolList,
+  ProposalType,
+  ProposalKpi,
+  ProposalForm,
+  ProposalPreview,
+  ProposalConfirm,
+} from "./partials";
 import { PageHeader } from "./partials/common";
 
 type Props = {};
 
 const ProposalNewPage = (props: Props) => {
-  const { protocol, prsalType, kpi } = useParams();
+  const { protocol, prsalType, kpi, status } = useParams();
+
   return (
     <Box className="main-body flex flex-col grow">
       <Box className="flex flex-col min-h-full main-content gap-14">
         <PageHeader />
         <Box>
-          {prsalType && protocol && kpi ? (
+          {prsalType && protocol && kpi && status ? (
+            status === "preview" ? (
+              <ProposalPreview />
+            ) : (
+              <ProposalConfirm />
+            )
+          ) : prsalType && protocol && kpi ? (
             <ProposalForm />
           ) : prsalType && protocol ? (
             <ProposalKpi />
