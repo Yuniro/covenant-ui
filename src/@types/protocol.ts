@@ -7,7 +7,7 @@ export type ProtocolSymbol = "qidao" | "olivedao" | "frax" | "aave";
 
 export enum EnumProtocolName {
   qidao = "QiDAO",
-  olivedao = "QliveDAO",
+  olivedao = "OliveDAO",
   frax = "Frax",
   aave = "Aave",
 }
