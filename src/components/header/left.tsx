@@ -1,7 +1,7 @@
 import React, { FC, FunctionComponent, SVGProps } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import classNames from "classnames";
-import { Box, Link, SvgIcon, Typography } from "@mui/material";
+import { Box, SvgIcon, Typography } from "@mui/material";
 import { ReactComponent as GaugeIcon } from "../../assets/icons/gauge.svg";
 import { ReactComponent as ProQidaoIcon } from "../../assets/icons/pro-qidao.svg";
 import { ReactComponent as ProAaveIcon } from "../../assets/icons/pro-aave.svg";
@@ -48,9 +48,15 @@ const HeaderLeft = (props: Props) => {
       title = "Create a proposal";
       subtitle =
         protocol && prsalType && kpi && status
-          ? "Proposal created successfully"
+          ? status === "confirm"
+            ? "Proposal created successfully"
+            : "Check your information is correct"
           : protocol && prsalType && kpi
           ? "Add information about your proposal"
+          : protocol && prsalType
+          ? "Select the KPI option to use for payout"
+          : protocol
+          ? "Create a gauge vote or governance proposal"
           : "Choose protocol to create proposal for";
     }
   }

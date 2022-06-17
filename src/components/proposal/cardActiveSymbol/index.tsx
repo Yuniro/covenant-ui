@@ -7,6 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import { Proposal } from "../../../@types/proposal";
 import {
   EnumProtocolName,
@@ -18,19 +19,35 @@ import { ProposalCardHeader } from "../cardHeader";
 type Props = {
   protocol: Protocol;
   proposals: Proposal[];
+  isHistory?: boolean;
 };
 
 const Content = styled(CardContent)(({ theme }) => ({
   backgroundColor: theme.palette.gray.main,
 }));
 
-const ProposalCardActiveSymbol = ({ protocol, proposals }: Props) => {
+const ProposalCardActiveSymbol = ({
+  protocol,
+  proposals,
+  isHistory,
+}: Props) => {
   const colHeads = ["Name", "Vote Incentive", ""];
+  const navigate = useNavigate();
+
+  const onJoinClick = (proposal: Proposal) => {
+    navigate("vote", {
+      state: {
+        proposal,
+      },
+    });
+  };
 
   return (
     <Card className="">
       <ProposalCardHeader
-        title={`Active Proposals for ${EnumProtocolName[protocol.symbol]}`}
+        title={`${isHistory ? "History" : "Active"} Proposals for ${
+          EnumProtocolName[protocol.symbol]
+        }`}
       ></ProposalCardHeader>
       <Content>
         <Box className="grid grid-cols-3 gap-8">
@@ -48,9 +65,15 @@ const ProposalCardActiveSymbol = ({ protocol, proposals }: Props) => {
                 <Typography variant="subtitle2">{`${p.reward} ${
                   EnumProtocolSymbolName[p.protocol.symbol]
                 }`}</Typography>
-                <Button variant="contained" color="gray">
-                  Join
-                </Button>
+                {!isHistory && (
+                  <Button
+                    variant="contained"
+                    color="gray"
+                    onClick={() => onJoinClick(p)}
+                  >
+                    Join
+                  </Button>
+                )}
               </Box>
               {idx + 1 < proposals.length && <Divider className={"!my-2"} />}
             </Box>
@@ -59,6 +82,10 @@ const ProposalCardActiveSymbol = ({ protocol, proposals }: Props) => {
       </Content>
     </Card>
   );
+};
+
+ProposalCardActiveSymbol.defaultProps = {
+  isHistory: false,
 };
 
 export { ProposalCardActiveSymbol };

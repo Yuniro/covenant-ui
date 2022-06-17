@@ -1,5 +1,11 @@
 import { Protocol } from "./protocol";
 
+export type Matic = {
+  total: number;
+  votes: number;
+  amount: number;
+};
+
 export type Proposal = {
   name: string;
   protocol: Protocol;
@@ -8,6 +14,10 @@ export type Proposal = {
   type: EnumProposalType;
   kpi: EnumProposalKpi;
   voteIncentive?: boolean;
+  totalValue: number;
+  userVote: number;
+  userShare: number;
+  matic: Matic;
 };
 
 export enum EnumProposalType {
@@ -22,5 +32,6 @@ export enum EnumProposalKpi {
 
 export type ProposalState = {
   activeProposals: Proposal[];
+  historyProposals: Proposal[];
   currentProposal: Proposal | null;
 };

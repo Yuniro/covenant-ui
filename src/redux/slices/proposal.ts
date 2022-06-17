@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProposalState } from "../../@types/proposal";
-import { _proposalsActive } from "../../_mock";
+import { _proposalsActive, _proposalsHistory } from "../../_mock";
 //
 import { dispatch } from "../store";
 
@@ -8,6 +8,7 @@ import { dispatch } from "../store";
 
 const initialState: ProposalState = {
   activeProposals: _proposalsActive,
+  historyProposals: _proposalsHistory,
   currentProposal: null,
 };
 

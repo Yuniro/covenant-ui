@@ -1,16 +1,21 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useParams } from "react-router-dom";
-import { Proposal } from "../../@types/proposal";
-import { ProposalCardActive, ProposalCardActiveSymbol } from "../../components";
+import SwipeableViews from "react-swipeable-views";
+import { CustomTabs as Tabs } from "../../components";
 import { useSelector } from "../../redux/store";
-import { ProtocolsList } from "../../@types/protocol";
+import ActiveProposals from "./active";
+import HistoryProposals from "./history";
 
 type Props = {};
 
-const ProposalPage = (props: Props) => {
+const tabs: string[] = ["Proposals", "History"];
+
+const ProposalSymbol = (props: Props) => {
   let { symbol } = useParams();
   const proposalState = useSelector(state => state.proposal);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const paramSymbol = symbol ?? "";
 
@@ -18,26 +23,36 @@ const ProposalPage = (props: Props) => {
     // TODO: return to homepage
   }
 
-  const filteredProposals = proposalState.activeProposals.filter(
-    ap => ap.protocol.symbol === paramSymbol
-  );
-
-  const filteredProtocol = ProtocolsList.filter(p => p.symbol === paramSymbol);
-
-  if (filteredProtocol.length === 0) {
-    // TODO: return as we did not find correct protocol
-  }
+  const handleTabChange = (event: React.SyntheticEvent, index: number) => {
+    setTabIndex(index);
+  };
 
   return (
     <Box className="main-body flex flex-col grow">
       <Box className="flex flex-col min-h-full main-content gap-14">
-        <ProposalCardActiveSymbol
-          protocol={filteredProtocol[0]}
-          proposals={filteredProposals}
-        />
+        <Box className="flex justify-between">
+          <Tabs tabIndex={tabIndex} tabs={tabs} setTabIndex={setTabIndex} />
+          <Button
+            variant="contained"
+            component="a"
+            color="pink"
+            className="h-16"
+            href="/proposal/new"
+            startIcon={<ControlPointIcon />}
+          >
+            Create Proposal
+          </Button>
+        </Box>
+        <SwipeableViews
+          index={tabIndex}
+          onChangeIndex={(index: number) => setTabIndex(index)}
+        >
+          <ActiveProposals symbol={paramSymbol} />
+          <HistoryProposals symbol={paramSymbol} />
+        </SwipeableViews>
       </Box>
     </Box>
   );
 };
 
-export default ProposalPage;
+export default ProposalSymbol;
