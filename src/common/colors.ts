@@ -9,6 +9,7 @@ const colors = {
   pink: "#e03b76",
   // maroon: "#8f4d68",
   purple: "#9747FF",
+  success: "#3BE069",
 };
 
 export { colors };

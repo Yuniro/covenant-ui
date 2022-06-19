@@ -1,4 +1,4 @@
-import { Card, CardContent, Box, Typography } from "@mui/material";
+import { Card, CardContent, Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Proposal } from "../../../@types/proposal";
 import { ProposalCardHeader } from "../cardHeader";
@@ -28,6 +28,11 @@ const ProposalCardWrappedMatic = ({ proposal }: Props) => {
           <Typography variant="subtitle2">${proposal.matic.total}</Typography>
           <Typography variant="subtitle2">{`${proposal.matic.votes}`}</Typography>
           <Typography variant="subtitle2">{`${proposal.matic.amount}`}</Typography>
+          <Box>
+            <Button variant="contained" color="pink" fullWidth={false}>
+              Add Vote
+            </Button>
+          </Box>
         </Box>
       </Content>
     </Card>

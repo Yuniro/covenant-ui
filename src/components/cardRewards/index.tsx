@@ -21,7 +21,7 @@ const CardRewards = (props: Props) => {
         {cols.map((c, idx) => (
           <Box key={`col_${idx}`} className="flex flex-col gap-5">
             <Typography variant="caption">{c.title}</Typography>
-            <Typography variant="subtitle2">{c.value}</Typography>
+            <Typography variant="subtitle1">{c.value}</Typography>
           </Box>
         ))}
       </Content>

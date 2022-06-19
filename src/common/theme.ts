@@ -34,6 +34,14 @@ declare module "@mui/material/Button" {
   }
 }
 
+declare module "@mui/material/Typography" {
+  interface Typograph {
+    third: true;
+    gray: true;
+    pink: true;
+  }
+}
+
 declare module "@mui/material/styles/createPalette" {
 
   interface Palette {
@@ -156,7 +164,7 @@ const commonOptions: ThemeOptions = {
       fontWeight: 400,
     },
     subtitle2: {
-      fontSize: "2rem",
+      fontSize: "1.6rem",
       fontWeight: 400,
     },
     caption: {

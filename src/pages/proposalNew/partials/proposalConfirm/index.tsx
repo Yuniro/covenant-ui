@@ -1,19 +1,40 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useLocation } from "react-router-dom";
-import { FormDataPreview } from "../../../../components/form";
+import CheckIcon from "@mui/icons-material/Check";
+import { colors } from "../../../../common";
 
 type Props = {};
 
-const ProposalConfirm = (props: Props) => {
+const BoxCheck = styled(Box)(({ theme }) => ({
+  backgroundColor: colors.success,
+}));
 
+const ProposalConfirm = (props: Props) => {
   return (
     <Box className="flex flex-col  gap-8">
       <Box className="flex flex-col p-20 rounded-md gap-8">
-        <Typography>
-          Your proposal has been created, you can view your proposal by opening
-          this link https://covenant.vote/yhs77hannnnabsh69 IPFS: LINK
-        </Typography>
+        <Box className="flex justify-center">
+          <BoxCheck className="w-64 h-64 rounded flex items-center justify-center">
+            <CheckIcon className="!w-32 !h-32" />
+          </BoxCheck>
+        </Box>
+        <Box className="flex flex-col justify-center gap-6 my-10">
+          <Typography variant="h6" className="text-center">
+            Your proposal has been created, you can view your proposal by
+            opening this link{" "}
+            <Link
+              variant="h6"
+              target="_blank"
+              href="https://covenant.vote/yhs77hannnnabsh69"
+            >
+              https://covenant.vote/yhs77hannnnabsh69
+            </Link>
+          </Typography>
+
+          <Typography variant="h6" className="text-center">
+            IPFS: LINK
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

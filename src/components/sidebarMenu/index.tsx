@@ -165,6 +165,7 @@ const SidebarMenu = (props: Props) => {
                     "mlg:hidden mlg:group-hover:flex mlg:items-center",
                     styles.menuText
                   )}
+                  variant="subtitle2"
                 >
                   {link.text}
                 </Typography>

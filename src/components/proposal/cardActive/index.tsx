@@ -27,7 +27,7 @@ const ProposalCardActive = (props: Props) => {
     <Card className="">
       <ProposalCardHeader title="My active proposals"></ProposalCardHeader>
       <Content>
-        <Box className="grid grid-cols-4 gap-8">
+        <Box className="grid grid-cols-4 gap-8 mb-8">
           {colHeads.map((c, idx) => (
             <Box key={`colHead_${idx}`}>
               <Typography variant="caption">{c}</Typography>
@@ -38,19 +38,21 @@ const ProposalCardActive = (props: Props) => {
           {activeProposals.map((p, idx) => (
             <Box key={`prop_${idx}`}>
               <Box className="grid grid-cols-4 gap-8">
-                <Typography variant="subtitle2">{p.protocol.name}</Typography>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle1">{p.protocol.name}</Typography>
+                <Typography variant="subtitle1">
                   {p.isActive ? "Active" : "Inactive"}
                 </Typography>
-                <Typography variant="subtitle2">{`${p.reward} ${
+                <Typography variant="subtitle1">{`${p.reward} ${
                   EnumProtocolSymbolName[p.protocol.symbol]
                 }`}</Typography>
-                <Button variant="contained" color="gray">
-                  Claim
-                </Button>
+                <Box className="flex justify-center">
+                  <Button variant="contained" color="gray">
+                    Claim
+                  </Button>
+                </Box>
               </Box>
               {idx + 1 < activeProposals.length && (
-                <Divider className={"!my-2"} />
+                <Divider className={"!my-4"} />
               )}
             </Box>
           ))}
