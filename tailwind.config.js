@@ -8,10 +8,14 @@ module.exports = {
     },
     screens: {
       sm: "576px",
+
+      smx: { max: "576px" },
       // => @media (min-width: 576px) { ... }
 
       md: "768px",
       // => @media (min-width: 768px) { ... }
+
+      mdx: { max: "768px" },
 
       mlg: "911px",
       // => @media (min-width: 911px) { ... }

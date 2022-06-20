@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Box, Link, Typography, SvgIcon } from "@mui/material";
+import { Box, Link, Typography, SvgIcon, Divider, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MenuLink } from "../../@types";
@@ -69,12 +69,6 @@ const SidebarMenu = (props: Props) => {
       href: "/proposal/aave",
     },
     {
-      icon: "pro-aave",
-      text: "OliveDAO",
-      href: "/proposal/olivedao",
-      separator: true,
-    },
-    {
       icon: "liquidty",
       text: "Liquidity Mining",
       href: "/liquidity-mining",
@@ -96,7 +90,7 @@ const SidebarMenu = (props: Props) => {
   return (
     <Box
       className={classNames(
-        "relative mlg:min-w-[70px]",
+        "relative",
         styles.main,
         isMobile && styles.mainMobile
       )}
@@ -104,7 +98,7 @@ const SidebarMenu = (props: Props) => {
     >
       <Box
         className={classNames(
-          "flex h-24 items-center justify-between mlgx:w-full mlg:fixed mlg:h-screen mlg mlg:flex-col mlg:justify-start mlg:w-28 mlg:hover:w-[185px] mlg:items-start group",
+          "flex h-24 w-80 items-center justify-between mlgx:w-full mlg:h-screen mlg mlg:flex-col mlg:justify-start mlg:items-start group px-9 pt-10",
           styles.mainInner
         )}
         component="section"
@@ -113,12 +107,12 @@ const SidebarMenu = (props: Props) => {
           <Link
             href={PUBLIC_URL}
             className={classNames(
-              "px-4 relative block mlg:!ml-8 mlg:px-0",
+              "px-4 relative block mlg:px-0",
               styles.menuLogo
             )}
             underline="none"
           >
-            <Typography variant="h3">C</Typography>
+            <Typography variant="h6" className="!font-bold">Covenant</Typography>
           </Link>
         </Box>
         <Typography className="mlg:hidden" variant="h4">
@@ -138,39 +132,65 @@ const SidebarMenu = (props: Props) => {
         </button>
         <Box
           className={classNames(
-            "flex mlg:flex-col",
+            "flex mlg:flex-col pt-8",
             styles.menu,
             isMobile && styles.menuMobile
           )}
         >
           {links.map((link, idx) => (
-            <Link
-              key={`lnk_${idx}`}
-              href={link.href}
-              className="py-4 flex mlg:!ml-8"
-              underline="none"
-            >
-              <Box component="span" className={classNames("flex gap-2")}>
-                <Box
-                  component="span"
-                  className={classNames(
-                    "w-12 h-12 hidden mlg:flex items-center justify-center",
-                    styles.menuIcon
-                  )}
-                >
-                  <SvgIcon component={getIcon(link.icon)} viewBox="0 0 31 31" />
-                </Box>
-                <Typography
-                  className={classNames(
-                    "mlg:hidden mlg:group-hover:flex mlg:items-center",
-                    styles.menuText
-                  )}
-                  variant="subtitle2"
-                >
-                  {link.text}
-                </Typography>
-              </Box>
-            </Link>
+            <>
+              {
+                link.disabled ?
+                  <Button
+                    className="!p-0 mlg:!justify-start"
+                    startIcon={
+                      <Box
+                        component="span"
+                        className={classNames(
+                          "ml-2 w-8 h-8 hidden mlg:flex items-center justify-center",
+                          styles.menuIcon
+                        )}
+                      >
+                        <SvgIcon
+                          component={getIcon(link.icon)}
+                          viewBox="0 0 31 31"
+                        />
+                      </Box>
+                    }
+                    disabled
+                  >
+                    {link.text}</Button>
+                  :
+                  <Link
+                    key={`lnk_${idx}`}
+                    href={link.href}
+                    className="py-4 flex"
+                    underline="none"
+                  >
+                    <Box component="span" className={classNames("flex gap-2 items-center")}>
+                      <Box
+                        component="span"
+                        className={classNames(
+                          "w-8 h-8 hidden mlg:flex items-center justify-center",
+                          styles.menuIcon
+                        )}
+                      >
+                        <SvgIcon
+                          component={getIcon(link.icon)}
+                          viewBox="0 0 31 31"
+                        />
+                      </Box>
+                      <Typography
+                        className={classNames("mlg:items-center", styles.menuText)}
+                        variant="subtitle2"
+                      >
+                        {link.text}
+                      </Typography>
+                    </Box>
+                  </Link>
+              }
+              {link.separator && <Divider className="!my-6" />}
+            </>
           ))}
         </Box>
       </Box>

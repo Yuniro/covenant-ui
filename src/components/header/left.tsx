@@ -64,14 +64,14 @@ const HeaderLeft = (props: Props) => {
     <Box className={classNames("flex items-center gap-4")}>
       <Box
         className={classNames(
-          "flex items-center justify-center rounded-full w-24 h-24",
+          "flex items-center justify-center rounded-full w-16 h-16",
           styles.icon
         )}
       >
         <SvgIcon component={TitleIcon} viewBox="0 0 31 31" />
       </Box>
       <Box>
-        <Typography variant="h3">{title}</Typography>
+        <Typography variant="h4">{title}</Typography>
         {subtitle && <Typography variant="h6">{subtitle}</Typography>}
       </Box>
     </Box>

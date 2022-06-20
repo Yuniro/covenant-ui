@@ -10,14 +10,12 @@
       rgba(69, 71, 73) 0%,
       rgba(41, 51, 60) 100%
     );
+    box-shadow: 10px 0px 50px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease-in-out;
-    z-index: 5;
 
     &:hover {
       .menu {
         &Text {
-          opacity: 1;
-          margin-left: 10px;
         }
       }
     }
@@ -60,8 +58,7 @@
   }
 
   &Text {
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
+    margin-left: 10px;
   }
 
   body[class~="show-menu"] & {
