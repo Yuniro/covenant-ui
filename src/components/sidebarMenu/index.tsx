@@ -67,6 +67,7 @@ const SidebarMenu = (props: Props) => {
       icon: "pro-aave",
       text: "Aave",
       href: "/proposal/aave",
+      separator: true,
     },
     {
       icon: "liquidty",
@@ -98,7 +99,7 @@ const SidebarMenu = (props: Props) => {
     >
       <Box
         className={classNames(
-          "flex h-24 w-80 items-center justify-between mlgx:w-full mlg:h-screen mlg mlg:flex-col mlg:justify-start mlg:items-start group px-9 pt-10",
+          "flex h-24 w-80 items-center justify-between mlgx:w-full mlg:h-full mlg mlg:flex-col mlg:justify-start mlg:items-start group px-9 pt-10",
           styles.mainInner
         )}
         component="section"
@@ -142,14 +143,16 @@ const SidebarMenu = (props: Props) => {
               {
                 link.disabled ?
                   <Button
-                    className="!p-0 mlg:!justify-start"
+                    className="!p-0 mlg:!justify-start !py-4"
                     startIcon={
                       <Box
                         component="span"
                         className={classNames(
                           "ml-2 w-8 h-8 hidden mlg:flex items-center justify-center",
-                          styles.menuIcon
+                          styles.menuIcon,
+                          styles['menuIcon--disabled']
                         )}
+                        
                       >
                         <SvgIcon
                           component={getIcon(link.icon)}
@@ -189,7 +192,7 @@ const SidebarMenu = (props: Props) => {
                     </Box>
                   </Link>
               }
-              {link.separator && <Divider className="!my-6" />}
+              {link.separator && <Divider className="!my-4" />}
             </>
           ))}
         </Box>

@@ -1,11 +1,11 @@
 import {
-  Box,
   FormControl,
-  FormLabel,
   TextField,
   StyledEngineProvider,
+  Typography,
 } from "@mui/material";
-import React from "react";
+import classNames from "classnames";
+import styles from "../styles.module.scss";
 
 type Props = {
   placeholder?: string;
@@ -16,8 +16,17 @@ const FormTextField = ({ label, placeholder }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
-        <FormLabel className="basis-3/12">{label}</FormLabel>
-        <TextField className="basis-9/12" placeholder={placeholder} />
+        <Typography
+          className="basis-3/12 text-white"
+          component="label"
+          variant="subtitle2"
+        >
+          {label}
+        </Typography>
+        <TextField
+          className={classNames("basis-9/12", styles.input)}
+          placeholder={placeholder}
+        />
       </FormControl>
     </StyledEngineProvider>
   );

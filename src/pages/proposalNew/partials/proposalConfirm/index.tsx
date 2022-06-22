@@ -14,8 +14,8 @@ const ProposalConfirm = (props: Props) => {
     <Box className="flex flex-col  gap-8">
       <Box className="flex flex-col p-20 rounded-md gap-8">
         <Box className="flex justify-center">
-          <BoxCheck className="w-64 h-64 rounded flex items-center justify-center">
-            <CheckIcon className="!w-32 !h-32" />
+          <BoxCheck className="w-24 h-24 rounded flex items-center justify-center">
+            <CheckIcon className="!w-12 !h-12" />
           </BoxCheck>
         </Box>
         <Box className="flex flex-col justify-center gap-6 my-10">

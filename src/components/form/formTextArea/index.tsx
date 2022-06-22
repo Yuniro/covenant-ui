@@ -1,12 +1,12 @@
 import {
-  Box,
   FormControl,
-  FormLabel,
   StyledEngineProvider,
   TextareaAutosize,
   TextareaAutosizeProps,
+  Typography,
 } from "@mui/material";
-import React from "react";
+import classNames from "classnames";
+import styles from "../styles.module.scss";
 
 type Props = {
   placeholder?: string;
@@ -18,9 +18,15 @@ const FormTextArea = ({ label, placeholder, textAreaProps }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
-        <FormLabel className="basis-3/12">{label}</FormLabel>
+        <Typography
+          className="basis-3/12 text-white"
+          component="label"
+          variant="subtitle2"
+        >
+          {label}
+        </Typography>
         <TextareaAutosize
-          className="basis-9/12"
+          className={classNames("basis-9/12", styles.input)}
           placeholder={placeholder}
           minRows={3}
           {...textAreaProps}

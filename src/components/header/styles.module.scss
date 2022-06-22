@@ -6,6 +6,9 @@
 
 .icon {
   @extend %topIcon;
+  &Gauge {
+    color: #c4c4c4;
+  }
 }
 
 .action {

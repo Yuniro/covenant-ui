@@ -55,6 +55,10 @@
   &Icon {
     @extend %menuIcon;
     border-radius: 3px;
+
+    &--disabled {
+      color: #5a5d60;
+    }
   }
 
   &Text {

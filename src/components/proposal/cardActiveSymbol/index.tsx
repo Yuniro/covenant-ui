@@ -60,12 +60,18 @@ const ProposalCardActiveSymbol = ({
         <Box className="">
           {proposals.map((p, idx) => (
             <Box key={`prop_${idx}`}>
-              <Box className="grid grid-cols-3 gap-8">
+              <Box className="grid grid-cols-3 gap-8 items-center">
                 <Typography variant="subtitle2">{p.protocol.name}</Typography>
                 <Typography variant="subtitle2">{`${p.reward} ${
                   EnumProtocolSymbolName[p.protocol.symbol]
                 }`}</Typography>
-                {!isHistory && (
+                {isHistory ? (
+                  <Box>
+                    <Button variant="contained" color="pink">
+                      View
+                    </Button>
+                  </Box>
+                ) : (
                   <Button
                     variant="contained"
                     color="gray"

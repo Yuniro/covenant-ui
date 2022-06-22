@@ -1,7 +1,8 @@
-import React, { FC, FunctionComponent, SVGProps } from "react";
+import { FunctionComponent, SVGProps } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { Box, SvgIcon, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { ReactComponent as GaugeIcon } from "../../assets/icons/gauge.svg";
 import { ReactComponent as ProQidaoIcon } from "../../assets/icons/pro-qidao.svg";
 import { ReactComponent as ProAaveIcon } from "../../assets/icons/pro-aave.svg";
@@ -21,7 +22,7 @@ const HeaderLeft = (props: Props) => {
   let subtitle = "";
   let TitleIcon: FunctionComponent<
     SVGProps<SVGSVGElement> & { title?: string | undefined }
-  > = GaugeIcon;
+  > = () => <GaugeIcon className={styles.iconGauge} />;
 
   if (symbol) {
     title = EnumProtocolName[symbol as keyof typeof EnumProtocolName];
@@ -45,6 +46,7 @@ const HeaderLeft = (props: Props) => {
   if (locationArr[0] === "proposal") {
     const isNew = locationArr[1] === "new";
     if (isNew) {
+      TitleIcon = () => <AddIcon className="text-2xl zinc-900" />;
       title = "Create a proposal";
       subtitle =
         protocol && prsalType && kpi && status

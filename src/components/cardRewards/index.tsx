@@ -10,9 +10,10 @@ const Content = styled(CardContent)(({ theme }) => ({
 
 const CardRewards = (props: Props) => {
   const cols = [
-    { title: "Pending Rewards", value: "$28,912" },
-    { title: "Active Proposals", value: "3" },
-    { title: "Total Votes Given", value: "16" },
+    { title: "Pending Rewards", isText: false, value: "$28,912" },
+    { title: "Active Proposals", isText: false, value: "3" },
+    { title: "Total Votes Given", isText: false, value: "16" },
+    { title: "Description", isText: true, value: "Dummy description" },
   ];
   return (
     <Card className="">
@@ -21,7 +22,11 @@ const CardRewards = (props: Props) => {
         {cols.map((c, idx) => (
           <Box key={`col_${idx}`} className="flex flex-col gap-5">
             <Typography variant="caption">{c.title}</Typography>
-            <Typography variant="subtitle1">{c.value}</Typography>
+            {c.isText ? (
+              <Typography variant="subtitle2">{c.value}</Typography>
+            ) : (
+              <Typography variant="h5">{c.value}</Typography>
+            )}
           </Box>
         ))}
       </Content>
