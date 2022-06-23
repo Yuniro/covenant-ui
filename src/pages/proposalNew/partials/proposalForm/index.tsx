@@ -26,8 +26,8 @@ const ProposalForm = (props: Props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      votePercent: [{ value: 10 }],
-      range: [{ value: 10 }],
+      votePercent: [{ value: 0 }],
+      range: [{ value: 0 }],
       payout: [{ value: "" }],
     },
   });

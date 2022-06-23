@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { ReactNode } from "react";
+import styles from "../styles.module.scss";
 
 type Props = {
   placeholder?: string;
@@ -31,7 +32,7 @@ const FormSelect = ({ label, items, placeholder }: Props) => {
         </Typography>
         <Select className="basis-9/12" placeholder={placeholder}>
           {items?.map((item, idx) => (
-            <MenuItem key={`mi_${idx}`} value={item.value}>
+            <MenuItem key={`mi_${idx}`} className={styles.menuItem} value={item.value}>
               {item.display}
             </MenuItem>
           ))}

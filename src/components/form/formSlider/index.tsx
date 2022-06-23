@@ -25,7 +25,7 @@ const FormSlider = ({ label, valueLabelFormat }: Props) => {
         </Typography>
         <Box className="basis-9/12">
           <Slider
-            defaultValue={10}
+            defaultValue={0}
             aria-label="Default"
             valueLabelDisplay="auto"
             valueLabelFormat={valueLabelFormat}
