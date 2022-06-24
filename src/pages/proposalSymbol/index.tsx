@@ -37,7 +37,7 @@ const ProposalSymbol = (props: Props) => {
             component="a"
             color="pink"
             className="h-16"
-            href="/proposal/new"
+            href={`/proposal/new/${symbol}`}
             startIcon={<ControlPointIcon />}
           >
             Create Proposal

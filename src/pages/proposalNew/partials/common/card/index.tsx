@@ -1,12 +1,11 @@
-import { Box, Card, CardContent } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useNavigate, useRoutes } from "react-router-dom";
-import { Protocol } from "../../../../../@types/protocol";
+import { useNavigate } from "react-router-dom";
 import { ProposalCardHeader } from "../../../../../components";
 
 type Props = {
   title: string;
-  slug: string;
+  slug?: string;
 };
 
 const Content = styled(CardContent)(({ theme }) => ({
@@ -17,7 +16,7 @@ const ProposalNewCard = ({ title, slug }: Props) => {
   const navigate = useNavigate();
 
   const onClickNavigate = () => {
-    navigate(slug);
+    slug && navigate(slug);
   };
   return (
     <Card className="cursor-pointer" onClick={onClickNavigate}>

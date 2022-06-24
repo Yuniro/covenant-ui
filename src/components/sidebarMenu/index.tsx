@@ -59,11 +59,6 @@ const SidebarMenu = (props: Props) => {
       href: "/proposal/qidao",
     },
     {
-      icon: "pro-frax",
-      text: "Frax",
-      href: "/proposal/frax",
-    },
-    {
       icon: "pro-aave",
       text: "Aave",
       href: "/proposal/aave",
