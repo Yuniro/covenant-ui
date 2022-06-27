@@ -1,12 +1,13 @@
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import {
   FormTextArea,
   FormTextField,
   FormSelect,
   FormSlider,
+  FormRangeSlider,
 } from "../../../../components/form";
 import { ProposalNewCard } from "../common";
 
@@ -18,6 +19,9 @@ const BoxForm = styled(Box)(({ theme }) => ({
 
 const ProposalForm = (props: Props) => {
   const navigate = useNavigate();
+  const { protocol, prsalType, kpi, status } = useParams();
+
+  console.log("#@@", prsalType, kpi);
   const {
     register,
     handleSubmit,
@@ -58,6 +62,9 @@ const ProposalForm = (props: Props) => {
     });
   };
 
+  const isGovernance = prsalType === "governance";
+  const isFixed = kpi === "fixed";
+
   return (
     <Box
       className="flex flex-col gap-8 "
@@ -93,7 +100,33 @@ const ProposalForm = (props: Props) => {
             { value: 1, display: "Snapshot 1" },
             { value: 2, display: "Snapshot 2" },
           ]}
+          name="snapshotProposal"
+          control={control}
         />
+        {isGovernance && (
+          <FormSelect
+            label="Desired Vote Outcome"
+            placeholder="Choose desired vote outcome"
+            items={[
+              { value: 1, display: "Outcome 1" },
+              { value: 2, display: "Outcome 2" },
+            ]}
+            name="desiredVote"
+            control={control}
+          />
+        )}
+        {!isGovernance && isFixed && (
+          <FormSelect
+            label="Select Gauge"
+            placeholder="Choose gauge"
+            items={[
+              { value: 1, display: "Currency 1" },
+              { value: 2, display: "Currency 2" },
+            ]}
+            name="gaugeFixed"
+            control={control}
+          />
+        )}
         <FormSelect
           label="Reward Currency"
           placeholder="Choose your reward currency"
@@ -101,10 +134,13 @@ const ProposalForm = (props: Props) => {
             { value: 1, display: "Currency 1" },
             { value: 2, display: "Currency 2" },
           ]}
+          name="rewardCurrency"
+          control={control}
         />
         <FormTextField
-          label="Minimum Proposal"
+          label="Minimum Bribe"
           name="minimumProposal"
+          helpText="Enter minimum bribe value if applicable"
           control={control}
           rules={{
             required: {
@@ -112,7 +148,7 @@ const ProposalForm = (props: Props) => {
               message: "You must enter minimum proposal.",
             },
           }}
-          placeholder="Minimum proposal can be set to 0"
+          placeholder="Enter minimum bribe amount if applicable"
         />
       </BoxForm>
 
@@ -121,34 +157,37 @@ const ProposalForm = (props: Props) => {
           <Box key={vp.id} className="flex flex-col gap-8">
             <FormSlider
               label="Vote %"
+              name="votePercent"
+              helpText="Select the vote% per which payment would be made, eg: 1%"
+              control={control}
               valueLabelFormat={(value: number) => `${value}%`}
             />
-            <FormSlider label="Range" />
             <FormTextField
               label="Payout"
               name="payout"
               control={control}
               index={idx}
+              placeholder="Enter payout in reward currency per vote percent selected above"
+            />
+            <FormRangeSlider
+              label="Range"
+              name="range"
+              control={control}
+              helpText="Select the range that you want to incentivise. The upper range would be considered the target vote. Open ended bribes require an upper range of 100%"
             />
           </Box>
         ))}
-
-        <FormTextArea
-          label="Blaclist Addresses"
-          placeholder="0x000000000000000000"
-        />
-        <FormTextArea
-          label="Whitelist Addresses"
-          placeholder="0x000000000000000000"
-        />
-        <FormTextField
+        <FormSelect
           label="Loyalty Vote"
           name="loyaltyVote"
           control={control}
-          rules={{
-            required: { value: true, message: "You must enter loyalty vote." },
-          }}
           placeholder="Number of vote cylces to give payout. Max 4 cylces"
+          items={[
+            { value: 1, display: "1" },
+            { value: 2, display: "2" },
+            { value: 3, display: "3" },
+            { value: 4, display: "4" },
+          ]}
         />
       </BoxForm>
       <Box className="mb-20 flex justify-end">

@@ -4,4 +4,7 @@ export interface FormInputProps {
   setValue?: any;
   rules?: object;
   index?: number;
+  helpText?: string;
+  label?: string;
+  placeholder?: string;
 }

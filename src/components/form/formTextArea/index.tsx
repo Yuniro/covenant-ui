@@ -6,25 +6,24 @@ import {
   Typography,
 } from "@mui/material";
 import classNames from "classnames";
+import { FormInputProps } from "../formInputProps";
+import { FormLabel } from "../formLabel";
 import styles from "../styles.module.scss";
 
-type Props = {
-  placeholder?: string;
-  label?: string;
+interface Props extends FormInputProps {
   textAreaProps?: TextareaAutosizeProps;
-};
+}
 
-const FormTextArea = ({ label, placeholder, textAreaProps }: Props) => {
+const FormTextArea = ({
+  label,
+  helpText,
+  placeholder,
+  textAreaProps,
+}: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
-        <Typography
-          className="basis-3/12 text-white"
-          component="label"
-          variant="subtitle2"
-        >
-          {label}
-        </Typography>
+        <FormLabel label={label} helpText={helpText} />
         <TextareaAutosize
           className={classNames("basis-9/12", styles.input)}
           placeholder={placeholder}

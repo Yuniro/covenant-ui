@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  StyledEngineProvider,
-  Typography,
-  Box,
-  Slider,
-} from "@mui/material";
+import { FormControl, StyledEngineProvider, Box, Slider } from "@mui/material";
 import { FormInputProps } from "../formInputProps";
 import { FormLabel } from "../formLabel";
 
@@ -12,17 +6,17 @@ interface Props extends FormInputProps {
   valueLabelFormat?: (value: number, index: number) => string;
 }
 
-const FormSlider = ({ label, helpText, valueLabelFormat }: Props) => {
+const FormRangeSlider = ({ label, helpText, valueLabelFormat }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
         <FormLabel label={label} helpText={helpText} />
         <Box className="basis-9/12">
           <Slider
-            defaultValue={0}
+            defaultValue={[0, 10]}
+            max={100}
             aria-label="Default"
             valueLabelDisplay="auto"
-            valueLabelFormat={valueLabelFormat}
           />
         </Box>
       </FormControl>
@@ -30,9 +24,9 @@ const FormSlider = ({ label, helpText, valueLabelFormat }: Props) => {
   );
 };
 
-FormSlider.defaultProps = {
+FormRangeSlider.defaultProps = {
   label: "",
   placeholder: "",
 };
 
-export { FormSlider };
+export { FormRangeSlider };

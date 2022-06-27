@@ -3,16 +3,17 @@ import {
   TextField,
   StyledEngineProvider,
   Typography,
+  Box,
+  Tooltip,
 } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
 import classNames from "classnames";
 import { Controller } from "react-hook-form";
 import { FormInputProps } from "../formInputProps";
 import styles from "../styles.module.scss";
+import { FormLabel } from "../formLabel";
 
-interface Props extends FormInputProps {
-  placeholder?: string;
-  label?: string;
-}
+interface Props extends FormInputProps {}
 
 const FormTextField = ({
   label,
@@ -21,17 +22,12 @@ const FormTextField = ({
   control,
   rules,
   index,
+  helpText,
 }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
-        <Typography
-          className="basis-3/12 text-white"
-          component="label"
-          variant="subtitle2"
-        >
-          {label}
-        </Typography>
+        <FormLabel label={label} helpText={helpText} />
 
         <Controller
           name={name}
