@@ -19,19 +19,27 @@ const BoxForm = styled(Box)(({ theme }) => ({
 
 const ProposalForm = (props: Props) => {
   const navigate = useNavigate();
-  const { protocol, prsalType, kpi, status } = useParams();
+  const { prsalType, kpi } = useParams();
 
-  console.log("#@@", prsalType, kpi);
   const {
     register,
     handleSubmit,
     watch,
     control,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      votePercent: [{ value: 0 }],
-      range: [{ value: 0 }],
+      proposalName: "",
+      proposalDescription: "",
+      snapshotProposal: "",
+      desiredVote: "",
+      gaugeFixed: "",
+      rewardCurrency: "",
+      minimumProposal: "",
+      loyaltyVote: "",
+      votePercent: [{ value: 10 }],
+      range: [{ value: [0, 10] }],
       payout: [{ value: "" }],
     },
   });
@@ -160,6 +168,7 @@ const ProposalForm = (props: Props) => {
               name="votePercent"
               helpText="Select the vote% per which payment would be made, eg: 1%"
               control={control}
+              index={idx}
               valueLabelFormat={(value: number) => `${value}%`}
             />
             <FormTextField
@@ -172,13 +181,14 @@ const ProposalForm = (props: Props) => {
             <FormRangeSlider
               label="Range"
               name="range"
+              index={idx}
               control={control}
               helpText="Select the range that you want to incentivise. The upper range would be considered the target vote. Open ended bribes require an upper range of 100%"
             />
           </Box>
         ))}
         <FormSelect
-          label="Loyalty Vote"
+          label="Sticky Vote"
           name="loyaltyVote"
           control={control}
           placeholder="Number of vote cylces to give payout. Max 4 cylces"

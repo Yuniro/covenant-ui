@@ -3,9 +3,9 @@ import {
   StyledEngineProvider,
   Select,
   MenuItem,
-  Typography,
 } from "@mui/material";
-import React, { ReactNode } from "react";
+import { Controller } from "react-hook-form";
+import { ReactNode } from "react";
 import { FormInputProps } from "../formInputProps";
 import { FormLabel } from "../formLabel";
 import styles from "../styles.module.scss";
@@ -19,22 +19,55 @@ export type FormMenuItemType = {
   display: ReactNode;
 };
 
-const FormSelect = ({ label, helpText, items, placeholder }: Props) => {
+const FormSelect = ({
+  label,
+  placeholder,
+  name,
+  control,
+  rules,
+  index,
+  helpText,
+  items,
+}: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
         <FormLabel label={label} helpText={helpText} />
-        <Select className="basis-9/12" placeholder={placeholder}>
-          {items?.map((item, idx) => (
-            <MenuItem
-              key={`mi_${idx}`}
-              className={styles.menuItem}
-              value={item.value}
-            >
-              {item.display}
-            </MenuItem>
-          ))}
-        </Select>
+        <Controller
+          name={name}
+          control={control}
+          rules={rules}
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { error },
+            formState,
+          }) => {
+            let selectValue = value;
+            if (typeof index !== "undefined" && Array.isArray(value)) {
+              selectValue = value[index].value;
+            }
+            return (
+              <Select
+                className="basis-9/12"
+                placeholder={placeholder}
+                ref={ref}
+                onChange={onChange}
+                error={!!error}
+                value={selectValue}
+              >
+                {items?.map((item, idx) => (
+                  <MenuItem
+                    key={`mi_${idx}`}
+                    className={styles.menuItem}
+                    value={item.value}
+                  >
+                    {item.display}
+                  </MenuItem>
+                ))}
+              </Select>
+            );
+          }}
+        />
       </FormControl>
     </StyledEngineProvider>
   );

@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  TextField,
-  StyledEngineProvider,
-  Typography,
-  Box,
-  Tooltip,
-} from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
+import { FormControl, TextField, StyledEngineProvider } from "@mui/material";
 import classNames from "classnames";
 import { Controller } from "react-hook-form";
 import { FormInputProps } from "../formInputProps";
@@ -34,7 +26,7 @@ const FormTextField = ({
           control={control}
           rules={rules}
           render={({
-            field: { onChange, value },
+            field: { onChange, value, ref },
             fieldState: { error },
             formState,
           }) => {
@@ -46,6 +38,7 @@ const FormTextField = ({
               <TextField
                 className={classNames("basis-9/12", styles.input)}
                 placeholder={placeholder}
+                ref={ref}
                 helperText={error ? error.message : null}
                 error={!!error}
                 onChange={onChange}

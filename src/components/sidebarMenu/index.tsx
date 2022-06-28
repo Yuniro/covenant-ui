@@ -108,7 +108,9 @@ const SidebarMenu = (props: Props) => {
             )}
             underline="none"
           >
-            <Typography variant="h6" className="!font-bold">Covenant</Typography>
+            <Typography variant="h6" className="!font-bold">
+              Covenant
+            </Typography>
           </Link>
         </Box>
         <Typography className="mlg:hidden" variant="h4">
@@ -134,61 +136,66 @@ const SidebarMenu = (props: Props) => {
           )}
         >
           {links.map((link, idx) => (
-            <>
-              {
-                link.disabled ?
-                  <Button
-                    className="!p-0 mlg:!justify-start !py-4"
-                    startIcon={
-                      <Box
-                        component="span"
-                        className={classNames(
-                          "ml-2 w-8 h-8 hidden mlg:flex items-center justify-center",
-                          styles.menuIcon,
-                          styles['menuIcon--disabled']
-                        )}
-                        
-                      >
-                        <SvgIcon
-                          component={getIcon(link.icon)}
-                          viewBox="0 0 31 31"
-                        />
-                      </Box>
-                    }
-                    disabled
-                  >
-                    {link.text}</Button>
-                  :
-                  <Link
-                    key={`lnk_${idx}`}
-                    href={link.href}
-                    className="py-4 flex"
-                    underline="none"
-                  >
-                    <Box component="span" className={classNames("flex gap-2 items-center")}>
-                      <Box
-                        component="span"
-                        className={classNames(
-                          "w-8 h-8 hidden mlg:flex items-center justify-center",
-                          styles.menuIcon
-                        )}
-                      >
-                        <SvgIcon
-                          component={getIcon(link.icon)}
-                          viewBox="0 0 31 31"
-                        />
-                      </Box>
-                      <Typography
-                        className={classNames("mlg:items-center", styles.menuText)}
-                        variant="subtitle2"
-                      >
-                        {link.text}
-                      </Typography>
+            <Box key={`lnk_${idx}`}>
+              {link.disabled ? (
+                <Button
+                  className="!p-0 mlg:!justify-start !py-4"
+                  startIcon={
+                    <Box
+                      component="span"
+                      className={classNames(
+                        "ml-2 w-8 h-8 hidden mlg:flex items-center justify-center",
+                        styles.menuIcon,
+                        styles["menuIcon--disabled"]
+                      )}
+                    >
+                      <SvgIcon
+                        component={getIcon(link.icon)}
+                        viewBox="0 0 31 31"
+                      />
                     </Box>
-                  </Link>
-              }
+                  }
+                  disabled
+                >
+                  {link.text}
+                </Button>
+              ) : (
+                <Link
+                  key={`lnk_${idx}`}
+                  href={link.href}
+                  className="py-4 flex"
+                  underline="none"
+                >
+                  <Box
+                    component="span"
+                    className={classNames("flex gap-2 items-center")}
+                  >
+                    <Box
+                      component="span"
+                      className={classNames(
+                        "w-8 h-8 hidden mlg:flex items-center justify-center",
+                        styles.menuIcon
+                      )}
+                    >
+                      <SvgIcon
+                        component={getIcon(link.icon)}
+                        viewBox="0 0 31 31"
+                      />
+                    </Box>
+                    <Typography
+                      className={classNames(
+                        "mlg:items-center",
+                        styles.menuText
+                      )}
+                      variant="subtitle2"
+                    >
+                      {link.text}
+                    </Typography>
+                  </Box>
+                </Link>
+              )}
               {link.separator && <Divider className="!my-4" />}
-            </>
+            </Box>
           ))}
         </Box>
       </Box>

@@ -6,5 +6,6 @@ export interface FormInputProps {
   index?: number;
   helpText?: string;
   label?: string;
+  defaultValue?: any;
   placeholder?: string;
 }
