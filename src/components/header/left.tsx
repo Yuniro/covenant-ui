@@ -22,7 +22,7 @@ const HeaderLeft = (props: Props) => {
   let subtitle = "";
   let TitleIcon: FunctionComponent<
     SVGProps<SVGSVGElement> & { title?: string | undefined }
-  > = () => <GaugeIcon className={styles.iconGauge} />;
+  > = () => <GaugeIcon viewBox="0 0 45 45" className={styles.iconGauge} />;
 
   if (symbol) {
     title = EnumProtocolName[symbol as keyof typeof EnumProtocolName];

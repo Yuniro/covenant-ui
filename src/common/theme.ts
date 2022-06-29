@@ -1,7 +1,7 @@
 import {
   Palette as MuiPallete,
   PaletteColorOptions,
-  PaletteOptions ,
+  PaletteOptions,
   ThemeOptions,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
@@ -31,6 +31,7 @@ declare module "@mui/material/Button" {
     third: true;
     gray: true;
     pink: true;
+    tealLight: true;
   }
 }
 
@@ -39,23 +40,24 @@ declare module "@mui/material/Typography" {
     third: true;
     gray: true;
     pink: true;
+    tealLight: true;
   }
 }
 
 declare module "@mui/material/styles/createPalette" {
-
   interface Palette {
-    third: Palette['primary'];
-    gray: Palette['primary'];
-    pink: Palette['primary'];
+    third: Palette["primary"];
+    gray: Palette["primary"];
+    pink: Palette["primary"];
+    tealLight: Palette["primary"];
   }
   interface PaletteOptions {
     third: PaletteColorOptions;
     gray: PaletteColorOptions;
     pink: PaletteColorOptions;
+    tealLight: PaletteColorOptions;
   }
 }
-
 
 const darkOptions: PaletteOptions = {
   mode: "dark",
@@ -64,11 +66,11 @@ const darkOptions: PaletteOptions = {
     contrastText: "#f0f0f0",
   },
   secondary: {
-    main: "#723F8A",
+    main: colors.black,
     contrastText: "#fff",
   },
   third: {
-    main: colors.maroon,
+    main: colors.purpleMatt,
     contrastText: "#fff",
   },
   gray: {
@@ -77,6 +79,10 @@ const darkOptions: PaletteOptions = {
   },
   pink: {
     main: colors.pink,
+    contrastText: "#fff",
+  },
+  tealLight: {
+    main: colors.tealLight,
     contrastText: "#fff",
   },
   background: {
@@ -93,7 +99,7 @@ const lightOptions: PaletteOptions = {
     contrastText: "#fff",
   },
   third: {
-    main: colors.maroon,
+    main: colors.purpleMatt,
     contrastText: "#fff",
   },
   gray: {
@@ -102,6 +108,10 @@ const lightOptions: PaletteOptions = {
   },
   pink: {
     main: colors.pink,
+    contrastText: "#fff",
+  },
+  tealLight: {
+    main: colors.tealLight,
     contrastText: "#fff",
   },
   background: {
@@ -200,8 +210,7 @@ const commonOptions: ThemeOptions = {
           fontSize: "62.5%",
         },
         body: {
-          background:
-            "linear-gradient(180deg, rgba(7, 16, 24, 0.81) 0%, #0a131b 100%)",
+          backgroundColor: colors.blackGray,
         },
       },
     },

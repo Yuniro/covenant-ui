@@ -179,7 +179,9 @@ const SidebarMenu = (props: Props) => {
                     >
                       <SvgIcon
                         component={getIcon(link.icon)}
-                        viewBox="0 0 31 31"
+                        viewBox={
+                          link.icon === "gauge" ? "0 0 45 45" : "0 0 31 31"
+                        }
                       />
                     </Box>
                     <Typography

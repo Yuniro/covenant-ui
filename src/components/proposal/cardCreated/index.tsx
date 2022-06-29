@@ -14,7 +14,7 @@ import { ProposalCardHeader } from "../cardHeader";
 type Props = {};
 
 const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.gray.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const ProposalCardCreated = (props: Props) => {
@@ -46,7 +46,7 @@ const ProposalCardCreated = (props: Props) => {
                   EnumProtocolSymbolName[p.protocol.symbol]
                 }`}</Typography>
                 <Box className="flex justify-center">
-                  <Button variant="contained" color="pink">
+                  <Button variant="contained" color="tealLight">
                     View
                   </Button>
                 </Box>

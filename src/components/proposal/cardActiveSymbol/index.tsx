@@ -23,7 +23,7 @@ type Props = {
 };
 
 const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.gray.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const ProposalCardActiveSymbol = ({
@@ -66,19 +66,21 @@ const ProposalCardActiveSymbol = ({
                   EnumProtocolSymbolName[p.protocol.symbol]
                 }`}</Typography>
                 {isHistory ? (
-                  <Box>
-                    <Button variant="contained" color="pink">
+                  <Box className="text-center">
+                    <Button variant="contained" color="tealLight">
                       View
                     </Button>
                   </Box>
                 ) : (
-                  <Button
-                    variant="contained"
-                    color="gray"
-                    onClick={() => onJoinClick(p)}
-                  >
-                    Join
-                  </Button>
+                  <Box className="text-center">
+                    <Button
+                      variant="contained"
+                      color="tealLight"
+                      onClick={() => onJoinClick(p)}
+                    >
+                      View
+                    </Button>
+                  </Box>
                 )}
               </Box>
               {idx + 1 < proposals.length && <Divider className={"!my-2"} />}

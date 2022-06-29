@@ -16,14 +16,14 @@ const Header: FC = () => {
       <Box className="hidden mlg:flex gap-6">
         <Button
           variant="contained"
-          color="secondary"
+          color="third"
           disableRipple
           className="!cursor-default"
           component="span"
         >
           Polygon
         </Button>
-        <Button variant="contained" color="gray">
+        <Button variant="contained" color="secondary">
           Connect your wallet
         </Button>
       </Box>

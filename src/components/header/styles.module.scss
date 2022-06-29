@@ -7,7 +7,7 @@
 .icon {
   @extend %topIcon;
   &Gauge {
-    color: #c4c4c4;
+    color: main.$var-clr-white;
   }
 }
 

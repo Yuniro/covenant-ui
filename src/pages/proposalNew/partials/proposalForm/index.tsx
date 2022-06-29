@@ -1,15 +1,14 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Slider, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import {
-  FormTextArea,
   FormTextField,
   FormSelect,
   FormSlider,
   FormRangeSlider,
 } from "../../../../components/form";
-import { ProposalNewCard } from "../common";
+import { FormLabel } from "../../../../components/form/formLabel";
 
 type Props = {};
 
@@ -38,6 +37,8 @@ const ProposalForm = (props: Props) => {
       rewardCurrency: "",
       minimumProposal: "",
       loyaltyVote: "",
+      minVoteWeightNum: 0,
+      minVoteWeightSlide: 0,
       votePercent: [{ value: 10 }],
       range: [{ value: [0, 10] }],
       payout: [{ value: "" }],
@@ -145,46 +146,141 @@ const ProposalForm = (props: Props) => {
           name="rewardCurrency"
           control={control}
         />
-        <FormTextField
-          label="Minimum Bribe"
-          name="minimumProposal"
-          helpText="Enter minimum bribe value if applicable"
-          control={control}
-          rules={{
-            required: {
-              value: true,
-              message: "You must enter minimum proposal.",
-            },
-          }}
-          placeholder="Enter minimum bribe amount if applicable"
-        />
+        {!isGovernance && (
+          <FormTextField
+            label="Minimum Bribe"
+            name="minimumProposal"
+            helpText="Enter minimum bribe value if applicable"
+            control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "You must enter minimum proposal.",
+              },
+            }}
+            placeholder="Enter minimum bribe amount if applicable"
+          />
+        )}
       </BoxForm>
 
       <BoxForm className="flex flex-col p-20 rounded-md gap-8">
         {votePercentFields.map((vp, idx) => (
           <Box key={vp.id} className="flex flex-col gap-8">
-            <FormSlider
-              label="Vote %"
-              name="votePercent"
-              helpText="Select the vote% per which payment would be made, eg: 1%"
-              control={control}
-              index={idx}
-              valueLabelFormat={(value: number) => `${value}%`}
-            />
+            {!isGovernance && (
+              <FormSlider
+                label="Vote %"
+                name="votePercent"
+                helpText="Select the vote% per which payment would be made, eg: 1%"
+                control={control}
+                index={idx}
+                valueLabelFormat={(value: number) => `${value}%`}
+              />
+            )}
             <FormTextField
               label="Payout"
               name="payout"
               control={control}
               index={idx}
-              placeholder="Enter payout in reward currency per vote percent selected above"
+              placeholder={
+                isGovernance
+                  ? "Amount that will be paid out if vote concludes with desired outcome"
+                  : "Enter payout in reward currency per vote percent selected above"
+              }
             />
-            <FormRangeSlider
-              label="Range"
-              name="range"
-              index={idx}
-              control={control}
-              helpText="Select the range that you want to incentivise. The upper range would be considered the target vote. Open ended bribes require an upper range of 100%"
-            />
+            {isGovernance ? (
+              <Box className="flex gap-4">
+                <FormLabel
+                  label="Minimum Vote Weight"
+                  helpText="mention the minimum vote weight that the user has to vote with in order to be eligible for the bribe"
+                />
+                <Box className="flex basis-9/12">
+                  <Box className="basis-9/12 flex items-center">
+                    <Controller
+                      name="minVoteWeightSlide"
+                      control={control}
+                      render={({
+                        field: { onChange, value, name, ref },
+                        formState,
+                      }) => {
+                        let slideVal = Number(value);
+                        if (
+                          typeof idx !== "undefined" &&
+                          Array.isArray(value)
+                        ) {
+                          slideVal = Number(value[idx].value);
+                        }
+                        return (
+                          <Slider
+                            getAriaLabel={() => "Default"}
+                            ref={ref}
+                            value={slideVal}
+                            onChange={(e, changeVal) => {
+                              let finalVal = 0;
+                              if (Array.isArray(changeVal)) {
+                                finalVal = changeVal[0];
+                              } else {
+                                finalVal = changeVal;
+                              }
+                              setValue("minVoteWeightNum", finalVal);
+                              onChange(changeVal);
+                            }}
+                            valueLabelDisplay="auto"
+                          />
+                        );
+                      }}
+                    />
+                  </Box>
+                  <Box className="basis-1/12"></Box>
+                  <Box className="basis-2/12">
+                    <Controller
+                      name="minVoteWeightNum"
+                      control={control}
+                      render={({
+                        field: { onChange, value, ref },
+                        fieldState: { error },
+                        formState,
+                      }) => {
+                        let txtValue = value;
+                        if (
+                          typeof idx !== "undefined" &&
+                          Array.isArray(value)
+                        ) {
+                          txtValue = value[idx].value;
+                        }
+                        return (
+                          <TextField
+                            ref={ref}
+                            helperText={error ? error.message : null}
+                            error={!!error}
+                            type="number"
+                            InputProps={{
+                              inputProps: { min: 0, max: 100, maxLength: 3 },
+                            }}
+                            onChange={e => {
+                              setValue(
+                                "minVoteWeightSlide",
+                                Number(e.target.value)
+                              );
+                              onChange(e.target.value);
+                            }}
+                            value={txtValue}
+                            fullWidth
+                          />
+                        );
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              <FormRangeSlider
+                label="Range"
+                name="range"
+                index={idx}
+                control={control}
+                helpText="Select the range that you want to incentivise. The upper range would be considered the target vote. Open ended bribes require an upper range of 100%"
+              />
+            )}
           </Box>
         ))}
         <FormSelect

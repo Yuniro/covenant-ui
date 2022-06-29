@@ -35,7 +35,7 @@ const ProposalSymbol = (props: Props) => {
           <Button
             variant="contained"
             component="a"
-            color="pink"
+            color="tealLight"
             className="h-16"
             href={`/proposal/new/${symbol}`}
             startIcon={<ControlPointIcon />}

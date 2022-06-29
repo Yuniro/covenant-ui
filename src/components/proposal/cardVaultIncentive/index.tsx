@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.gray.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const ProposalCardVaultIncentive = ({ proposal }: Props) => {

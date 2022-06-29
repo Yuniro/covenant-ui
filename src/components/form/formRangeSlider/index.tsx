@@ -34,10 +34,11 @@ const FormRangeSlider = ({
               return (
                 <Slider
                   getAriaLabel={() => "Default"}
-                  value={sliderVal}
+                  defaultValue={sliderVal}
                   ref={ref}
                   onChange={(event: Event, newValue: number | number[]) => {
-                    setValue && setValue(newValue);
+                    // setValue && setValue(newValue);
+                    onChange(newValue);
                   }}
                   valueLabelDisplay="auto"
                   valueLabelFormat={valueLabelFormat}
