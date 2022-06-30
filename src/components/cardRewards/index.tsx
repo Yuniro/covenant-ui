@@ -1,6 +1,8 @@
 import { Card, CardContent, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { colors } from "../../common";
 import { ProposalCardHeader } from "../proposal";
+import { TextHead } from "../text";
 
 type Props = {};
 
@@ -21,7 +23,7 @@ const CardRewards = (props: Props) => {
       <Content className="grid grid-cols-4 gap-8">
         {cols.map((c, idx) => (
           <Box key={`col_${idx}`} className="flex flex-col gap-5">
-            <Typography variant="caption">{c.title}</Typography>
+            <TextHead>{c.title}</TextHead>
             {c.isText ? (
               <Typography variant="subtitle2">{c.value}</Typography>
             ) : (

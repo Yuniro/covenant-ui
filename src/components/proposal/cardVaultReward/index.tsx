@@ -2,7 +2,6 @@ import { Card, CardContent, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Proposal } from "../../../@types/proposal";
 import { TextContent, TextHead } from "../../text";
-import { ProposalCardHeader } from "../cardHeader";
 
 type Props = {
   proposal: Proposal;
@@ -13,13 +12,12 @@ const Content = styled(CardContent)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
 }));
 
-const ProposalCardVaultIncentive = ({ proposal, isProposer }: Props) => {
+const ProposalCardVaultReward = ({ proposal, isProposer }: Props) => {
   const colHeads = isProposer
-    ? ["Total Value Power"]
-    : ["Total Value Power", "My Vote"];
+    ? ["Total rewards to distribute"]
+    : ["My unclaimed reward"];
   return (
     <Card className="">
-      <ProposalCardHeader title="Vault Incentive Gauge"></ProposalCardHeader>
       <Content>
         <Box className="grid grid-cols-2 gap-8">
           {colHeads.map((c, idx) => (
@@ -30,15 +28,14 @@ const ProposalCardVaultIncentive = ({ proposal, isProposer }: Props) => {
         </Box>
         <Box className="grid grid-cols-2 gap-8">
           <TextContent>${proposal.totalValue}</TextContent>
-          {!isProposer && <TextContent>{`${proposal.userVote}`}</TextContent>}
         </Box>
       </Content>
     </Card>
   );
 };
 
-ProposalCardVaultIncentive.defaultProps = {
+ProposalCardVaultReward.defaultProps = {
   isProposer: false,
 };
 
-export { ProposalCardVaultIncentive };
+export { ProposalCardVaultReward };

@@ -67,7 +67,7 @@ const darkOptions: PaletteOptions = {
   },
   secondary: {
     main: colors.black,
-    contrastText: "#fff",
+    contrastText: colors.textGray,
   },
   third: {
     main: colors.purpleMatt,
@@ -123,7 +123,7 @@ const commonOptions: ThemeOptions = {
   typography: {
     htmlFontSize: 10,
     fontFamily: [
-      "Inter",
+      "DM Sans",
       "-apple-system",
       "BlinkMacSystemFont",
       "Segoe UI",

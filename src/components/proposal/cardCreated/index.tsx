@@ -9,6 +9,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { EnumProtocolSymbolName } from "../../../@types/protocol";
 import { useSelector } from "../../../redux/store";
+import { TextContent, TextHead } from "../../text";
 import { ProposalCardHeader } from "../cardHeader";
 
 type Props = {};
@@ -30,7 +31,7 @@ const ProposalCardCreated = (props: Props) => {
         <Box className="grid grid-cols-4 gap-8 mb-8">
           {colHeads.map((c, idx) => (
             <Box key={`colHead_${idx}`}>
-              <Typography variant="caption">{c}</Typography>
+              <TextHead>{c}</TextHead>
             </Box>
           ))}
         </Box>
@@ -38,13 +39,11 @@ const ProposalCardCreated = (props: Props) => {
           {activeProposals.map((p, idx) => (
             <Box key={`prop_${idx}`}>
               <Box className="grid grid-cols-4 gap-8">
-                <Typography variant="subtitle1">{p.protocol.name}</Typography>
-                <Typography variant="subtitle1">
-                  {p.isActive ? "Active" : "Inactive"}
-                </Typography>
-                <Typography variant="subtitle1">{`${p.reward} ${
+                <TextContent>{p.protocol.name}</TextContent>
+                <TextContent>{p.isActive ? "Active" : "Inactive"}</TextContent>
+                <TextContent>{`${p.reward} ${
                   EnumProtocolSymbolName[p.protocol.symbol]
-                }`}</Typography>
+                }`}</TextContent>
                 <Box className="flex justify-center">
                   <Button variant="contained" color="tealLight">
                     View
