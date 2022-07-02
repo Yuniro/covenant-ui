@@ -1,5 +1,6 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { EnumProtocolName } from "../../@types/protocol";
 import { colors } from "../../common";
 import {
   NavBack,
@@ -13,6 +14,7 @@ type Props = {};
 
 const ProposalSymbolVote = (props: Props) => {
   const location = useLocation();
+  const { symbol } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const isProposer = searchParams.get("proposer") && true;
@@ -78,8 +80,17 @@ const ProposalSymbolVote = (props: Props) => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} className="flex !flex-col">
           <TimeRemaining></TimeRemaining>
+          <Box className="relative flex flex-auto">
+            <Box className="flex flex-col flex-auto gap-2 text-center pt-6 md:text-right md:pt-0 md:absolute md:right-0 md:bottom-0">
+              <Link href="#">Go to Snapshot</Link>
+              <Link href="#">
+                Go to{" "}
+                {`${EnumProtocolName[symbol as keyof typeof EnumProtocolName]}`}
+              </Link>
+            </Box>
+          </Box>
         </Grid>
       </Grid>
       <Box className="mt-16 mb-32"></Box>

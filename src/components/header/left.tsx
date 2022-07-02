@@ -6,7 +6,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { ReactComponent as GaugeIcon } from "../../assets/icons/gauge.svg";
 import { ReactComponent as ProQidaoIcon } from "../../assets/icons/pro-qidao.svg";
 import { ReactComponent as ProAaveIcon } from "../../assets/icons/pro-aave.svg";
-import { ReactComponent as ProFraxIcon } from "../../assets/icons/pro-frax.svg";
 import { EnumProtocolName } from "../../@types/protocol";
 import styles from "./styles.module.scss";
 
@@ -40,7 +39,9 @@ const HeaderLeft = (props: Props) => {
   if (locationArr[0] === "proposal") {
     const isNew = locationArr[1] === "new";
     if (isNew) {
-      TitleIcon = () => <AddIcon className="text-2xl zinc-900" />;
+      TitleIcon = () => (
+        <AddIcon className={classNames("text-2xl zinc-900", styles.iconAdd)} />
+      );
       title = "Create a proposal";
       subtitle =
         protocol && prsalType && kpi && status
@@ -61,10 +62,15 @@ const HeaderLeft = (props: Props) => {
       <Box
         className={classNames(
           "flex items-center justify-center rounded-full w-16 h-16",
-          styles.icon
+          styles.icon,
+          symbol && styles.iconSymbol
         )}
       >
-        <SvgIcon component={TitleIcon} viewBox="0 0 31 31" />
+        <SvgIcon
+          className={styles.icon}
+          component={TitleIcon}
+          viewBox="0 0 31 31"
+        />
       </Box>
       <Box>
         <Typography variant="h4">{title}</Typography>

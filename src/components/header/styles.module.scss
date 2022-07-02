@@ -9,7 +9,17 @@
   &Gauge {
     color: main.$var-clr-white;
   }
-}
 
-.action {
+  &Add {
+    fill: main.$var-clr-white !important;
+  }
+
+  &Symbol {
+    background: #c4c4c4;
+
+    svg {
+      background: transparent;
+      color: #111314;
+    }
+  }
 }

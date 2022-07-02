@@ -1,6 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation, useParams } from "react-router-dom";
-import { EnumProposalKpi, EnumProposalType } from "../../../../../@types/proposal";
+import {
+  EnumProposalKpi,
+  EnumProposalType,
+} from "../../../../../@types/proposal";
 import { EnumProtocolName } from "../../../../../@types/protocol";
 
 type Props = {};
@@ -30,7 +33,7 @@ const BreadCrumb = (props: Props) => {
       href: `${locPrefix}/${prsalType}`,
     });
   }
-  if (kpi) {
+  if (kpi && kpi !== 'form') {
     locPrefix = `${locPrefix}/${kpi}`;
     items.push({
       title: EnumProposalKpi[kpi as keyof typeof EnumProposalKpi],
