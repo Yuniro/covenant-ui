@@ -4,10 +4,11 @@ import { colors } from "../../../common";
 
 type Props = {
   children?: React.ReactNode;
+  className?: string;
 };
 
-const TextHead: React.FC<Props> = ({ children }) => (
-  <Typography variant="caption" color={colors.textGray}>
+const TextHead: React.FC<Props> = ({ children, className }) => (
+  <Typography variant="caption" color={colors.textGray} className={className}>
     {children}
   </Typography>
 );

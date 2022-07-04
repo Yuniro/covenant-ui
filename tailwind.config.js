@@ -6,6 +6,12 @@ module.exports = {
         "screen-lgx": "1100px",
       },
     },
+    container: {
+      screens: {
+        sm: "100%",
+        md: "100%",
+      },
+    },
     screens: {
       sm: "576px",
 

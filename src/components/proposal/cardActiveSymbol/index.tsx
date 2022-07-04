@@ -5,8 +5,11 @@ import {
   Typography,
   Divider,
   Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { Proposal } from "../../../@types/proposal";
 import {
@@ -34,6 +37,8 @@ const ProposalCardActiveSymbol = ({
 }: Props) => {
   const colHeads = ["Name", "Vote Incentive", ""];
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isAboveMd = useMediaQuery(theme.breakpoints.up("smd"));
 
   const onJoinClick = (proposal: Proposal, idx: number) => {
     const path = idx % 2 === 0 ? "vote" : "vote?proposer=1";
@@ -52,7 +57,12 @@ const ProposalCardActiveSymbol = ({
         }`}
       ></ProposalCardHeader>
       <Content>
-        <Box className="grid grid-cols-3 gap-8">
+        <Box
+          className={classNames(
+            "grid grid-cols-3 gap-8",
+            !isAboveMd && "hidden"
+          )}
+        >
           {colHeads.map((c, idx) => (
             <Box key={`colHead_${idx}`}>
               <TextHead>{c}</TextHead>
@@ -62,19 +72,38 @@ const ProposalCardActiveSymbol = ({
         <Box className="">
           {proposals.map((p, idx) => (
             <Box key={`prop_${idx}`}>
-              <Box className="grid grid-cols-3 gap-8 items-center">
-                <TextContent>{p.protocol.name}</TextContent>
-                <TextContent>{`${p.reward} ${
-                  EnumProtocolSymbolName[p.protocol.symbol]
-                }`}</TextContent>
+              <Box
+                className={classNames(
+                  "grid gap-8",
+                  isAboveMd ? "grid-cols-3 items-center" : "grid-cols-2"
+                )}
+              >
+                <Box
+                  className={classNames("flex flex-col", !isAboveMd && "gap-1")}
+                >
+                  <TextHead className={classNames(isAboveMd && "hidden")}>
+                    {colHeads[0]}
+                  </TextHead>
+                  <TextContent>{p.protocol.name}</TextContent>
+                </Box>
+                <Box
+                  className={classNames("flex flex-col", !isAboveMd && "gap-1")}
+                >
+                  <TextHead className={classNames(isAboveMd && "hidden")}>
+                    {colHeads[1]}
+                  </TextHead>
+                  <TextContent>{`${p.reward} ${
+                    EnumProtocolSymbolName[p.protocol.symbol]
+                  }`}</TextContent>
+                </Box>
                 {isHistory ? (
-                  <Box className="text-center">
+                  <Box className={classNames(isAboveMd && "text-center")}>
                     <Button variant="contained" color="tealLight">
                       View
                     </Button>
                   </Box>
                 ) : (
-                  <Box className="text-center">
+                  <Box className={classNames(isAboveMd && "text-center")}>
                     <Button
                       variant="contained"
                       color="tealLight"

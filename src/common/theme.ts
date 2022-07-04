@@ -18,6 +18,7 @@ declare module "@mui/material/styles" {
   interface BreakpointOverrides {
     xs: true;
     sm: true;
+    smd: true;
     md: true;
     mlg: true;
     lg: true;
@@ -196,6 +197,7 @@ const commonOptions: ThemeOptions = {
     values: {
       xs: 0,
       sm: 576,
+      smd: 610,
       md: 768,
       mlg: 911,
       lg: 992,
@@ -230,6 +232,13 @@ const commonOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           backgroundImage: "none",
+        },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: "1.3rem",
         },
       },
     },
