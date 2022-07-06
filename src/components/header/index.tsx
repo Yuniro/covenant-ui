@@ -23,7 +23,7 @@ const Header: FC = () => {
         >
           Polygon
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="tealLight">
           Connect your wallet
         </Button>
       </Box>

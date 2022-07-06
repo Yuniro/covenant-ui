@@ -17,19 +17,17 @@ interface Props {
   heads: string[];
 }
 
-const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-}));
+const Content = styled(CardContent)(({ theme }) => ({}));
 
 const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
   const theme = useTheme();
   const isAboveMd = useMediaQuery(theme.breakpoints.up("smd"));
 
   return (
-    <Content>
+    <Content className="!p-0">
       <Box
         className={classNames(
-          "grid grid-cols-4 gap-8 mb-8",
+          "grid grid-cols-4 gap-8 px-6 mb-8",
           !isAboveMd && "hidden"
         )}
       >
@@ -39,9 +37,9 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
           </Box>
         ))}
       </Box>
-      <Box className="">
+      <Box className="flex flex-col gap-4">
         {proposals.map((p, idx) => (
-          <Box key={`prop_${idx}`}>
+          <Box key={`prop_${idx}`} className="p-6 bg-black rounded-md">
             <Box
               className={classNames(
                 "grid gap-8",
@@ -85,7 +83,6 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
                 </Button>
               </Box>
             </Box>
-            {idx + 1 < proposals.length && <Divider className={"!my-4"} />}
           </Box>
         ))}
       </Box>

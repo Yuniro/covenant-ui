@@ -26,9 +26,7 @@ type Props = {
   isHistory?: boolean;
 };
 
-const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-}));
+const Content = styled(CardContent)(({ theme }) => ({}));
 
 const ProposalCardActiveSymbol = ({
   protocol,
@@ -56,10 +54,10 @@ const ProposalCardActiveSymbol = ({
           EnumProtocolName[protocol.symbol]
         }`}
       ></ProposalCardHeader>
-      <Content>
+      <Content className="!p-0">
         <Box
           className={classNames(
-            "grid grid-cols-3 gap-8",
+            "grid grid-cols-3 gap-8 px-6 mb-8",
             !isAboveMd && "hidden"
           )}
         >
@@ -69,9 +67,9 @@ const ProposalCardActiveSymbol = ({
             </Box>
           ))}
         </Box>
-        <Box className="">
+        <Box className="flex flex-col gap-4">
           {proposals.map((p, idx) => (
-            <Box key={`prop_${idx}`}>
+            <Box key={`prop_${idx}`} className="p-6 bg-black rounded-md">
               <Box
                 className={classNames(
                   "grid gap-8",
@@ -114,7 +112,6 @@ const ProposalCardActiveSymbol = ({
                   </Box>
                 )}
               </Box>
-              {idx + 1 < proposals.length && <Divider className={"!my-2"} />}
             </Box>
           ))}
         </Box>

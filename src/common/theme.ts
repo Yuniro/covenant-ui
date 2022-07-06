@@ -238,7 +238,7 @@ const commonOptions: ThemeOptions = {
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          fontSize: "1.3rem",
+          fontSize: "1.4rem",
         },
       },
     },

@@ -2,13 +2,15 @@ import { Card, CardContent, Box, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import classNames from "classnames";
+import { colors } from "../../common";
 import { ProposalCardHeader } from "../proposal";
 import { TextHead } from "../text";
 
 type Props = {};
 
 const Content = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.tealLight.main,
+  borderRadius: "4px",
 }));
 
 const CardRewards = (props: Props) => {
@@ -37,11 +39,15 @@ const CardRewards = (props: Props) => {
               isAboveMd ? "gap-5" : "gap-1"
             )}
           >
-            <TextHead>{c.title}</TextHead>
+            <TextHead color={colors.black}>{c.title}</TextHead>
             {c.isText ? (
-              <Typography variant="subtitle2">{c.value}</Typography>
+              <Typography variant="subtitle2" color="secondary">
+                {c.value}
+              </Typography>
             ) : (
-              <Typography variant="h5">{c.value}</Typography>
+              <Typography variant="h5" color="secondary">
+                {c.value}
+              </Typography>
             )}
           </Box>
         ))}

@@ -21,6 +21,7 @@ const ProposalType = (props: Props) => {
             key={`pl_${idx}`}
             title={EnumProposalType[pt as keyof typeof EnumProposalType]}
             slug={pt === "gauge" ? pt : `${pt}/form`}
+            isType
           />
         ))}
     </Box>

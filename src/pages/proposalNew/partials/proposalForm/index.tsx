@@ -15,6 +15,7 @@ import {
   FormSelect,
   FormSlider,
   FormRangeSlider,
+  FormSliderInput,
 } from "../../../../components/form";
 import { FormLabel } from "../../../../components/form/formLabel";
 import classNames from "classnames";
@@ -23,7 +24,7 @@ import { colors } from "../../../../common";
 type Props = {};
 
 const BoxForm = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.gray.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const ProposalForm = (props: Props) => {
@@ -50,6 +51,7 @@ const ProposalForm = (props: Props) => {
       minVoteWeightNum: 0,
       minVoteWeightSlide: 0,
       votePercent: [{ value: 10 }],
+      votePercentNum: [{ value: 10 }],
       range: [{ value: [0, 10] }],
       payout: [{ value: "" }],
     },
@@ -59,7 +61,15 @@ const ProposalForm = (props: Props) => {
     fields: votePercentFields,
     append: votePercentAppend,
     remove: votePercentRemove,
+    update: votePercentUpdate,
   } = useFieldArray({ control, name: "votePercent" });
+
+  const {
+    fields: votePercentNumFields,
+    append: votePercentNumAppend,
+    remove: votePercentNumRemove,
+    update: votePercentNumUpdate,
+  } = useFieldArray({ control, name: "votePercentNum" });
 
   const {
     fields: rangeFields,
@@ -87,14 +97,24 @@ const ProposalForm = (props: Props) => {
 
   const onAddGaugeVariable = () => {
     votePercentAppend({ value: 0 });
+    votePercentNumAppend({ value: 0 });
     rangeAppend({ value: [0, 10] });
     payoutAppend({ value: "" });
   };
 
   const onDeleteGaugeVariable = (idx?: number | number[]) => {
     votePercentRemove(idx);
+    votePercentNumRemove(idx);
     rangeRemove(idx);
     payoutRemove(idx);
+  };
+
+  const onSliderUpdate = (index: number, value: number) => {
+    votePercentUpdate(index, { value });
+  };
+
+  const onSliderInputUpdate = (index: number, value: number) => {
+    votePercentNumUpdate(index, { value });
   };
 
   return (
@@ -219,13 +239,17 @@ const ProposalForm = (props: Props) => {
               )}
             >
               {!isGovernance && (
-                <FormSlider
+                <FormSliderInput
                   label="Vote %"
-                  name="votePercent"
                   helpText="Select the vote% per which payment would be made, eg: 1%"
-                  control={control}
+                  name="votePercent"
+                  inputName="votePercentNum"
                   index={idx}
+                  control={control}
+                  setValue={setValue}
                   valueLabelFormat={(value: number) => `${value}%`}
+                  updateSlider={onSliderUpdate}
+                  updateInput={onSliderInputUpdate}
                 />
               )}
               <FormTextField
@@ -241,88 +265,15 @@ const ProposalForm = (props: Props) => {
               />
               {isGovernance ? (
                 <Box className="flex gap-4">
-                  <FormLabel
+                  <FormSliderInput
                     label="Minimum Vote Weight"
                     helpText="mention the minimum vote weight that the user has to vote with in order to be eligible for the bribe"
+                    name="minVoteWeightSlide"
+                    inputName="minVoteWeightNum"
+                    index={idx}
+                    control={control}
+                    setValue={setValue}
                   />
-                  <Box className="flex basis-9/12">
-                    <Box className="basis-9/12 flex items-center">
-                      <Controller
-                        name="minVoteWeightSlide"
-                        control={control}
-                        render={({
-                          field: { onChange, value, name, ref },
-                          formState,
-                        }) => {
-                          let slideVal = Number(value);
-                          if (
-                            typeof idx !== "undefined" &&
-                            Array.isArray(value)
-                          ) {
-                            slideVal = Number(value[idx].value);
-                          }
-                          return (
-                            <Slider
-                              getAriaLabel={() => "Default"}
-                              ref={ref}
-                              value={slideVal}
-                              onChange={(e, changeVal) => {
-                                let finalVal = 0;
-                                if (Array.isArray(changeVal)) {
-                                  finalVal = changeVal[0];
-                                } else {
-                                  finalVal = changeVal;
-                                }
-                                setValue("minVoteWeightNum", finalVal);
-                                onChange(changeVal);
-                              }}
-                              valueLabelDisplay="auto"
-                            />
-                          );
-                        }}
-                      />
-                    </Box>
-                    <Box className="basis-1/12"></Box>
-                    <Box className="basis-2/12">
-                      <Controller
-                        name="minVoteWeightNum"
-                        control={control}
-                        render={({
-                          field: { onChange, value, ref },
-                          fieldState: { error },
-                          formState,
-                        }) => {
-                          let txtValue = value;
-                          if (
-                            typeof idx !== "undefined" &&
-                            Array.isArray(value)
-                          ) {
-                            txtValue = value[idx].value;
-                          }
-                          return (
-                            <TextField
-                              ref={ref}
-                              helperText={error ? error.message : null}
-                              error={!!error}
-                              type="number"
-                              InputProps={{
-                                inputProps: { min: 0, max: 100, maxLength: 3 },
-                              }}
-                              onChange={e => {
-                                setValue(
-                                  "minVoteWeightSlide",
-                                  Number(e.target.value)
-                                );
-                                onChange(e.target.value);
-                              }}
-                              value={txtValue}
-                              fullWidth
-                            />
-                          );
-                        }}
-                      />
-                    </Box>
-                  </Box>
                 </Box>
               ) : (
                 <FormRangeSlider
@@ -348,18 +299,20 @@ const ProposalForm = (props: Props) => {
             </Button>
           </Box>
         )}
-        <FormSelect
-          label="Sticky Vote"
-          name="loyaltyVote"
-          control={control}
-          placeholder="Number of vote cylces to give payout. Max 4 cylces"
-          items={[
-            { value: 1, display: "1" },
-            { value: 2, display: "2" },
-            { value: 3, display: "3" },
-            { value: 4, display: "4" },
-          ]}
-        />
+        {!isGovernance && (
+          <FormSelect
+            label="Sticky Vote"
+            name="loyaltyVote"
+            control={control}
+            placeholder="Number of vote cylces to give payout. Max 4 cylces"
+            items={[
+              { value: 1, display: "1" },
+              { value: 2, display: "2" },
+              { value: 3, display: "3" },
+              { value: 4, display: "4" },
+            ]}
+          />
+        )}
       </BoxForm>
       <Box className="mb-20 flex justify-end">
         <Button variant="contained" color="pink" type="submit">

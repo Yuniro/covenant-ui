@@ -9,6 +9,7 @@ import { ReactNode } from "react";
 import { FormInputProps } from "../formInputProps";
 import { FormLabel } from "../formLabel";
 import styles from "../styles.module.scss";
+import classNames from "classnames";
 
 interface Props extends FormInputProps {
   items?: FormMenuItemType[];
@@ -48,7 +49,7 @@ const FormSelect = ({
             }
             return (
               <Select
-                className="basis-9/12"
+                className={classNames("basis-9/12", styles.input)}
                 placeholder={placeholder}
                 ref={ref}
                 onChange={onChange}
