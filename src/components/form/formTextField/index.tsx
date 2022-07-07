@@ -1,11 +1,19 @@
-import { FormControl, TextField, StyledEngineProvider } from "@mui/material";
+import {
+  FormControl,
+  TextField,
+  StyledEngineProvider,
+  InputProps,
+} from "@mui/material";
 import classNames from "classnames";
 import { Controller } from "react-hook-form";
 import { FormInputProps } from "../formInputProps";
 import styles from "../styles.module.scss";
 import { FormLabel } from "../formLabel";
 
-interface Props extends FormInputProps {}
+interface Props extends FormInputProps {
+  inputProps?: InputProps;
+  inputClass?: string;
+}
 
 const FormTextField = ({
   label,
@@ -15,11 +23,13 @@ const FormTextField = ({
   rules,
   index,
   helpText,
+  inputProps,
+  inputClass
 }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
       <FormControl className="flex flex-row items-center gap-4">
-        <FormLabel label={label} helpText={helpText} />
+        {label && <FormLabel label={label} helpText={helpText} />}
 
         <Controller
           name={name}
@@ -36,7 +46,7 @@ const FormTextField = ({
             }
             return (
               <TextField
-                className={classNames("basis-9/12", styles.input)}
+                className={classNames(label && "basis-9/12", styles.input, inputClass)}
                 placeholder={placeholder}
                 ref={ref}
                 helperText={error ? error.message : null}
@@ -44,6 +54,7 @@ const FormTextField = ({
                 onChange={onChange}
                 value={txtValue}
                 fullWidth
+                InputProps={inputProps}
               />
             );
           }}

@@ -9,7 +9,7 @@ const PageHeader = (props: Props) => {
   const { protocol } = useParams();
 
   return protocol ? (
-    <Box className="flex justify-between">
+    <Box className="flex justify-between gap-8">
       <NavBack />
       <BreadCrumb></BreadCrumb>
     </Box>

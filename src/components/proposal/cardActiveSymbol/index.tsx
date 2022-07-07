@@ -7,9 +7,12 @@ import {
   Button,
   useTheme,
   useMediaQuery,
+  InputAdornment,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import SearchIcon from "@mui/icons-material/Search";
 import classNames from "classnames";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Proposal } from "../../../@types/proposal";
 import {
@@ -17,6 +20,7 @@ import {
   EnumProtocolSymbolName,
   Protocol,
 } from "../../../@types/protocol";
+import { FormTextField } from "../../form";
 import { TextContent, TextHead } from "../../text";
 import { ProposalCardHeader } from "../cardHeader";
 
@@ -33,7 +37,7 @@ const ProposalCardActiveSymbol = ({
   proposals,
   isHistory,
 }: Props) => {
-  const colHeads = ["Name", "Vote Incentive", ""];
+  const colHeads = ["Name", "Vote Incentive", "Total Votes", "$/Vote", ""];
   const navigate = useNavigate();
   const theme = useTheme();
   const isAboveMd = useMediaQuery(theme.breakpoints.up("smd"));
@@ -47,6 +51,12 @@ const ProposalCardActiveSymbol = ({
     });
   };
 
+  const { control } = useForm({
+    defaultValues: {
+      searchText: "",
+    },
+  });
+
   return (
     <Card className="">
       <ProposalCardHeader
@@ -55,9 +65,24 @@ const ProposalCardActiveSymbol = ({
         }`}
       ></ProposalCardHeader>
       <Content className="!p-0">
+        <Box className="mb-16">
+          <FormTextField
+            name="minimumProposal"
+            control={control}
+            inputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            inputClass="bg-black"
+            placeholder="Search for proposals..."
+          />
+        </Box>
         <Box
           className={classNames(
-            "grid grid-cols-3 gap-8 px-6 mb-8",
+            "grid grid-cols-5 gap-8 px-6 mb-8",
             !isAboveMd && "hidden"
           )}
         >
@@ -73,7 +98,7 @@ const ProposalCardActiveSymbol = ({
               <Box
                 className={classNames(
                   "grid gap-8",
-                  isAboveMd ? "grid-cols-3 items-center" : "grid-cols-2"
+                  isAboveMd ? "grid-cols-5 items-center" : "grid-cols-2"
                 )}
               >
                 <Box
@@ -93,6 +118,22 @@ const ProposalCardActiveSymbol = ({
                   <TextContent>{`${p.reward} ${
                     EnumProtocolSymbolName[p.protocol.symbol]
                   }`}</TextContent>
+                </Box>
+                <Box
+                  className={classNames("flex flex-col", !isAboveMd && "gap-1")}
+                >
+                  <TextHead className={classNames(isAboveMd && "hidden")}>
+                    {colHeads[2]}
+                  </TextHead>
+                  <TextContent>12, 500</TextContent>
+                </Box>
+                <Box
+                  className={classNames("flex flex-col", !isAboveMd && "gap-1")}
+                >
+                  <TextHead className={classNames(isAboveMd && "hidden")}>
+                    {colHeads[3]}
+                  </TextHead>
+                  <TextContent>$0.07</TextContent>
                 </Box>
                 {isHistory ? (
                   <Box className={classNames(isAboveMd && "text-center")}>

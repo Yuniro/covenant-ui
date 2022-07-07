@@ -12,7 +12,7 @@ const ProposalKpi = (props: Props) => {
           key={`pl_${idx}`}
           title={EnumProposalKpi[pt as keyof typeof EnumProposalKpi]}
           slug={pt}
-          isSolid
+          isType
         />
       ))}
     </Box>

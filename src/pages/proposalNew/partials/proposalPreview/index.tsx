@@ -6,7 +6,7 @@ import { FormDataPreview } from "../../../../components/form";
 type Props = {};
 
 const BoxForm = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.gray.main,
+  backgroundColor: theme.palette.secondary.main,
 }));
 
 const ProposalPreview = (props: Props) => {
@@ -18,7 +18,7 @@ const ProposalPreview = (props: Props) => {
   };
 
   return (
-    <Box className="flex flex-col  gap-8">
+    <Box className="flex flex-col gap-8">
       <BoxForm className="flex flex-col p-20 rounded-md gap-8">
         <FormDataPreview label="Proposal Name" />
         <FormDataPreview label="Proposal Description" />

@@ -14,7 +14,7 @@ type NavItem = {
 };
 
 const BreadCrumb = (props: Props) => {
-  const { protocol, prsalType, kpi } = useParams();
+  const { protocol, prsalType, kpi, status } = useParams();
   const items: NavItem[] = [];
 
   let locPrefix = "/proposal/new";
@@ -33,16 +33,29 @@ const BreadCrumb = (props: Props) => {
       href: `${locPrefix}/${prsalType}`,
     });
   }
-  if (kpi && kpi !== 'form') {
-    locPrefix = `${locPrefix}/${kpi}`;
+  if (kpi) {
+    if (kpi !== "form") {
+      locPrefix = `${locPrefix}/${kpi}`;
+      items.push({
+        title: EnumProposalKpi[kpi as keyof typeof EnumProposalKpi],
+        href: `${locPrefix}/${kpi}`,
+      });
+    }
     items.push({
-      title: EnumProposalKpi[kpi as keyof typeof EnumProposalKpi],
-      href: `${locPrefix}/${kpi}`,
+      title: "Proposal Paramters",
+      href: "",
+    });
+  }
+
+  if (status) {
+    items.push({
+      title: "Overview",
+      href: "",
     });
   }
 
   return (
-    <Box className="flex gap-2">
+    <Box className="flex flex-wrap gap-2">
       {items.map((nav, idx) => (
         <Box className="flex gap-2 " key={`brd_${idx}`}>
           <Typography>{nav.title}</Typography>
