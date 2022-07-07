@@ -1,12 +1,11 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {
   FormTextField,
   FormSelect,
-  FormRangeSlider,
   FormSliderInput,
   FormRangeSliderInput,
 } from "../../../../components/form";
@@ -36,7 +35,7 @@ const ProposalForm = (props: Props) => {
       desiredVote: "",
       gaugeFixed: "",
       rewardCurrency: "",
-      minimumProposal: "",
+      minimumBribe: "0",
       loyaltyVote: "",
       minVoteWeightNum: 0,
       minVoteWeightSlide: 0,
@@ -44,7 +43,7 @@ const ProposalForm = (props: Props) => {
       votePercentNum: [{ value: 10 }],
       range: [{ value: [0, 10] }],
       rangeNum: [{ value: [0, 10] }],
-      payout: [{ value: "" }],
+      payout: [{ value: 0 }],
     },
   });
 
@@ -89,7 +88,7 @@ const ProposalForm = (props: Props) => {
     votePercentNumAppend({ value: 0 });
     rangeAppend({ value: [0, 10] });
     rangeNumAppend({ value: [0, 10] });
-    payoutAppend({ value: "" });
+    payoutAppend({ value: 0 });
   };
 
   const onDeleteGaugeVariable = (idx?: number | number[]) => {
@@ -180,7 +179,7 @@ const ProposalForm = (props: Props) => {
             {!isGovernance && (
               <FormTextField
                 label="Minimum Bribe"
-                name="minimumProposal"
+                name="minimumBribe"
                 helpText="Enter minimum bribe value if applicable"
                 control={control}
                 rules={{

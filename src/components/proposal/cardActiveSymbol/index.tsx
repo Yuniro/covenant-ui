@@ -2,8 +2,6 @@ import {
   Card,
   CardContent,
   Box,
-  Typography,
-  Divider,
   Button,
   useTheme,
   useMediaQuery,

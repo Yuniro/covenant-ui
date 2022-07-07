@@ -27,7 +27,7 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
     <Content className="!p-0">
       <Box
         className={classNames(
-          "grid grid-cols-4 gap-8 px-6 mb-8",
+          "grid grid-cols-5 gap-8 px-6 mb-8",
           !isAboveMd && "hidden"
         )}
       >
@@ -43,7 +43,7 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
             <Box
               className={classNames(
                 "grid gap-8",
-                isAboveMd ? "grid-cols-4" : "grid-cols-2"
+                isAboveMd ? "grid-cols-5" : "grid-cols-2"
               )}
             >
               <Box
@@ -60,7 +60,7 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
                 <TextHead className={classNames(isAboveMd && "hidden")}>
                   {heads[1]}
                 </TextHead>
-                <TextContent>{p.isActive ? "Active" : "Inactive"}</TextContent>
+                <TextContent>$56,000</TextContent>
               </Box>
               <Box
                 className={classNames(
@@ -71,9 +71,15 @@ const ProposalListCard: React.FC<Props> = ({ proposals, heads }) => {
                 <TextHead className={classNames(isAboveMd && "hidden")}>
                   {heads[2]}
                 </TextHead>
-                <TextContent>{`${p.reward} ${
-                  EnumProtocolSymbolName[p.protocol.symbol]
-                }`}</TextContent>
+                <TextContent>12,500</TextContent>
+              </Box>
+              <Box
+                className={classNames("flex flex-col", !isAboveMd && "gap-1")}
+              >
+                <TextHead className={classNames(isAboveMd && "hidden")}>
+                  {heads[3]}
+                </TextHead>
+                <TextContent>$0.07</TextContent>
               </Box>
               <Box
                 className={classNames("flex", isAboveMd && "justify-center")}

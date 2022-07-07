@@ -6,7 +6,7 @@ import ProposalListCard from "./proposalList";
 type Props = {};
 
 const ProposalCardActive = (props: Props) => {
-  const colHeads = ["Protocol", "Status", "Reward Accumulated", ""];
+  const colHeads = ["Title", "Vote Incentives", "Total Votes", "$/Vote", ""];
 
   const proposalState = useSelector(state => state.proposal);
   const { activeProposals } = proposalState;
