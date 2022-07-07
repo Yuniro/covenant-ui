@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Slider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -13,11 +6,9 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {
   FormTextField,
   FormSelect,
-  FormSlider,
   FormRangeSlider,
   FormSliderInput,
 } from "../../../../components/form";
-import { FormLabel } from "../../../../components/form/formLabel";
 import classNames from "classnames";
 import { colors } from "../../../../common";
 
@@ -32,9 +23,7 @@ const ProposalForm = (props: Props) => {
   const { prsalType, kpi } = useParams();
 
   const {
-    register,
     handleSubmit,
-    watch,
     control,
     setValue,
     formState: { errors },
@@ -61,27 +50,20 @@ const ProposalForm = (props: Props) => {
     fields: votePercentFields,
     append: votePercentAppend,
     remove: votePercentRemove,
-    update: votePercentUpdate,
   } = useFieldArray({ control, name: "votePercent" });
 
-  const {
-    fields: votePercentNumFields,
-    append: votePercentNumAppend,
-    remove: votePercentNumRemove,
-    update: votePercentNumUpdate,
-  } = useFieldArray({ control, name: "votePercentNum" });
+  const { append: votePercentNumAppend, remove: votePercentNumRemove } =
+    useFieldArray({ control, name: "votePercentNum" });
 
-  const {
-    fields: rangeFields,
-    append: rangeAppend,
-    remove: rangeRemove,
-  } = useFieldArray({ control, name: "range" });
+  const { append: rangeAppend, remove: rangeRemove } = useFieldArray({
+    control,
+    name: "range",
+  });
 
-  const {
-    fields: payoutFields,
-    append: payoutAppend,
-    remove: payoutRemove,
-  } = useFieldArray({ control, name: "payout" });
+  const { append: payoutAppend, remove: payoutRemove } = useFieldArray({
+    control,
+    name: "payout",
+  });
 
   const onFormSubmit = () => {
     navigate("preview", {
@@ -107,14 +89,6 @@ const ProposalForm = (props: Props) => {
     votePercentNumRemove(idx);
     rangeRemove(idx);
     payoutRemove(idx);
-  };
-
-  const onSliderUpdate = (index: number, value: number) => {
-    votePercentUpdate(index, { value });
-  };
-
-  const onSliderInputUpdate = (index: number, value: number) => {
-    votePercentNumUpdate(index, { value });
   };
 
   return (
@@ -242,14 +216,13 @@ const ProposalForm = (props: Props) => {
                 <FormSliderInput
                   label="Vote %"
                   helpText="Select the vote% per which payment would be made, eg: 1%"
-                  name="votePercent"
-                  inputName="votePercentNum"
+                  name={`votePercent[${idx}].value`}
+                  inputName={`votePercentNum[${idx}].value`}
                   index={idx}
                   control={control}
                   setValue={setValue}
                   valueLabelFormat={(value: number) => `${value}%`}
-                  updateSlider={onSliderUpdate}
-                  updateInput={onSliderInputUpdate}
+                  isArray
                 />
               )}
               <FormTextField
@@ -273,6 +246,7 @@ const ProposalForm = (props: Props) => {
                     index={idx}
                     control={control}
                     setValue={setValue}
+                    isArray
                   />
                 </Box>
               ) : (

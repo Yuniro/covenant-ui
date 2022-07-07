@@ -12,8 +12,7 @@ import { FormLabel } from "../formLabel";
 interface Props extends FormInputProps {
   valueLabelFormat?: (value: number, index: number) => string;
   inputName: string;
-  updateSlider?: (index: number, obj: number) => void;
-  updateInput?: (index: number, obj: number) => void;
+  isArray?: boolean;
 }
 
 const FormSliderInput = ({
@@ -26,8 +25,7 @@ const FormSliderInput = ({
   helpText,
   valueLabelFormat,
   setValue,
-  updateSlider,
-  updateInput,
+  isArray,
 }: Props) => {
   return (
     <StyledEngineProvider injectFirst>
@@ -39,13 +37,10 @@ const FormSliderInput = ({
               name={name}
               control={control}
               render={({
-                field: { onChange, value, name, ref },
+                field: { onChange, value: fieldValue, ref },
                 formState,
               }) => {
-                let slideVal = Number(value);
-                if (typeof index !== "undefined" && Array.isArray(value)) {
-                  slideVal = Number(value[index].value);
-                }
+                let slideVal = Number(fieldValue);
                 return (
                   <Slider
                     getAriaLabel={() => "Default"}
@@ -58,11 +53,7 @@ const FormSliderInput = ({
                       } else {
                         finalVal = changeVal;
                       }
-                      if (updateInput && typeof index !== undefined) {
-                        updateInput(index ?? 0, finalVal);
-                      } else {
-                        setValue(inputName, finalVal);
-                      }
+                      setValue(inputName, finalVal);
                       onChange(changeVal);
                     }}
                     valueLabelDisplay="auto"
@@ -78,14 +69,11 @@ const FormSliderInput = ({
               name={inputName}
               control={control}
               render={({
-                field: { onChange, value, ref },
+                field: { onChange, value: fieldValue, ref },
                 fieldState: { error },
                 formState,
               }) => {
-                let txtValue = value;
-                if (typeof index !== "undefined" && Array.isArray(value)) {
-                  txtValue = value[index].value;
-                }
+                let txtValue = fieldValue;
                 return (
                   <TextField
                     ref={ref}
@@ -96,11 +84,7 @@ const FormSliderInput = ({
                       inputProps: { min: 0, max: 100, maxLength: 3 },
                     }}
                     onChange={e => {
-                      if (updateSlider && typeof index !== "undefined") {
-                        updateSlider(index ?? 0, Number(e.target.value));
-                      } else {
-                        setValue(name, Number(e.target.value));
-                      }
+                      setValue(name, Number(e.target.value));
                       onChange(e.target.value);
                     }}
                     value={txtValue}
@@ -119,6 +103,7 @@ const FormSliderInput = ({
 FormSliderInput.defaultProps = {
   label: "",
   placeholder: "",
+  isArray: false,
 };
 
 export { FormSliderInput };
