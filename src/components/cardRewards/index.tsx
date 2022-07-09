@@ -20,7 +20,6 @@ const CardRewards = (props: Props) => {
     { title: "Pending Rewards", isText: false, value: "$28,912" },
     { title: "Active Proposals", isText: false, value: "3" },
     { title: "Total Votes Given", isText: false, value: "16" },
-    { title: "Description", isText: true, value: "Dummy description" },
   ];
   return (
     <Card className="">
@@ -28,7 +27,7 @@ const CardRewards = (props: Props) => {
       <Content
         className={classNames(
           "grid gap-8",
-          isAboveMd ? "grid-cols-4" : "grid-cols-1"
+          isAboveMd ? "grid-cols-3" : "grid-cols-1"
         )}
       >
         {cols.map((c, idx) => (

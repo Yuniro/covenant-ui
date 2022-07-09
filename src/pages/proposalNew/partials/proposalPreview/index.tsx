@@ -36,7 +36,7 @@ const ProposalPreview = (props: Props) => {
         <FormDataPreview label="Loyalty Vote" />
       </BoxForm>
       <Box className="mb-20 flex justify-end">
-        <Button variant="contained" color="pink" onClick={onFundProposal}>
+        <Button variant="contained" color="tealLight" onClick={onFundProposal}>
           Fund Proposal
         </Button>
       </Box>

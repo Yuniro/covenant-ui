@@ -303,11 +303,7 @@ const ProposalForm = (props: Props) => {
               />
             )}
           </BoxForm>
-          <Box className="mb-20 flex justify-end">
-            <Button variant="contained" color="tealLight" type="submit">
-              Continue
-            </Button>
-          </Box>
+          <Box className="mb-10 md:mb-20 flex justify-end"></Box>
         </Box>
         <Box>
           <BoxForm className="flex flex-col p-8 md:p-12 rounded-md gap-8 mb-12 md:mb-0">
@@ -326,7 +322,7 @@ const ProposalForm = (props: Props) => {
                 <Typography className="text-right">100k Mai</Typography>
               </Box>
             </Box>
-            <Button variant="contained" color="tealLight" type="button">
+            <Button variant="contained" color="tealLight" type="submit">
               Continue
             </Button>
           </BoxForm>
