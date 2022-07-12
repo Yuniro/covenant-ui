@@ -44,7 +44,7 @@ const CardRewards = (props: Props) => {
                 {c.value}
               </Typography>
             ) : (
-              <Typography variant="h5" color="secondary">
+              <Typography variant="h5" color="secondary" className="!font-bold">
                 {c.value}
               </Typography>
             )}

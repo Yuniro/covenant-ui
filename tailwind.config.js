@@ -5,6 +5,9 @@ module.exports = {
       maxWidth: {
         "screen-lgx": "1100px",
       },
+      minWidth: {
+        15: "15rem",
+      },
     },
     container: {
       screens: {

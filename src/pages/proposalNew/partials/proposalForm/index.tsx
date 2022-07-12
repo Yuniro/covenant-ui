@@ -72,7 +72,7 @@ const ProposalForm = (props: Props) => {
   });
 
   const onFormSubmit = () => {
-    navigate("preview", {
+    navigate("confirm", {
       state: {
         myProp: "Hey there",
       },
