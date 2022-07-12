@@ -232,7 +232,6 @@ const commonOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          backgroundColor: colors.black,
         },
       },
     },
